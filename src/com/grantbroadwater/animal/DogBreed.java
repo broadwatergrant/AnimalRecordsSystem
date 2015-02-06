@@ -11,17 +11,8 @@ public class DogBreed extends Breed {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		DogBreed breed = new DogBreed();
-		if(o instanceof DogBreed)
-			breed = (DogBreed)o;
-		else
-			return false;
-		
-		return (this.getName().equals(breed.getName())&&
-				this.getWeight().equals(breed.getWeight())&&
-				this.getHairColor().equals(breed.getHairColor())&&
-				this.getHairType().equals(breed.getHairType()));
+	public boolean equals(Object obj) {
+		return super.equals(obj);
 	}
 
 }

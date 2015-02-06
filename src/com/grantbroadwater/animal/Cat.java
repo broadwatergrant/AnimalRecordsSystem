@@ -125,19 +125,80 @@ public class Cat extends Animal {
 	public String toString(){
 		return this.getBreed()+" cat; "+this.getName();
 	}
-	
+
 	@Override
-	public boolean equals(Object o){
-		@SuppressWarnings("unused")
-		Cat c = new Cat();
-		if(o instanceof Cat)
-			c = (Cat)o;
-		else
-			return false;
-		
-		// TODO Compare all instance variables between (this : Cat) and (d : Cat)
-		return false;
-		
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((breed == null) ? 0 : breed.hashCode());
+		result = prime * result
+				+ ((decawingType == null) ? 0 : decawingType.hashCode());
+		result = prime * result + (declawed ? 1231 : 1237);
+		result = prime * result + (felineLeukemiaTest ? 1231 : 1237);
+		result = prime
+				* result
+				+ ((felineLeukemiaTestDate == null) ? 0
+						: felineLeukemiaTestDate.hashCode());
+		result = prime
+				* result
+				+ ((firstFleaTreatment == null) ? 0 : firstFleaTreatment
+						.hashCode());
+		result = prime * result + (fleaTest ? 1231 : 1237);
+		result = prime * result + (rabiesVaccine ? 1231 : 1237);
+		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
+		result = prime
+				* result
+				+ ((spayedNeuterDate == null) ? 0 : spayedNeuterDate.hashCode());
+		result = prime * result + (spayedNeutered ? 1231 : 1237);
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (!(obj instanceof Cat))
+			return false;
+		Cat other = (Cat) obj;
+		if (breed == null) {
+			if (other.breed != null)
+				return false;
+		} else if (!breed.equals(other.breed))
+			return false;
+		if (decawingType != other.decawingType)
+			return false;
+		if (declawed != other.declawed)
+			return false;
+		if (felineLeukemiaTest != other.felineLeukemiaTest)
+			return false;
+		if (felineLeukemiaTestDate == null) {
+			if (other.felineLeukemiaTestDate != null)
+				return false;
+		} else if (!felineLeukemiaTestDate.equals(other.felineLeukemiaTestDate))
+			return false;
+		if (firstFleaTreatment == null) {
+			if (other.firstFleaTreatment != null)
+				return false;
+		} else if (!firstFleaTreatment.equals(other.firstFleaTreatment))
+			return false;
+		if (fleaTest != other.fleaTest)
+			return false;
+		if (rabiesVaccine != other.rabiesVaccine)
+			return false;
+		if (sex != other.sex)
+			return false;
+		if (spayedNeuterDate == null) {
+			if (other.spayedNeuterDate != null)
+				return false;
+		} else if (!spayedNeuterDate.equals(other.spayedNeuterDate))
+			return false;
+		if (spayedNeutered != other.spayedNeutered)
+			return false;
+		return true;
+	}
+	
+	
 
 }

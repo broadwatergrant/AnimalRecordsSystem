@@ -59,19 +59,51 @@ public class Other extends Animal {
 	public String toString(){
 		return this.getSpecies()+"; "+this.getName();
 	}
-	
+
 	@Override
-	public boolean equals(Object o){
-		@SuppressWarnings("unused")
-		Other ot = new Other();
-		if(o instanceof Other)
-			ot = (Other)o;
-		else
-			return false;
-		
-		// TODO Compare all instance variables between (this : Other) and (d : Other)
-		return false;
-		
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((appearance == null) ? 0 : appearance.hashCode());
+		result = prime * result + ((species == null) ? 0 : species.hashCode());
+		result = prime * result
+				+ ((vaccinations == null) ? 0 : vaccinations.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(weight);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (!(obj instanceof Other))
+			return false;
+		Other other = (Other) obj;
+		if (appearance == null) {
+			if (other.appearance != null)
+				return false;
+		} else if (!appearance.equals(other.appearance))
+			return false;
+		if (species == null) {
+			if (other.species != null)
+				return false;
+		} else if (!species.equals(other.species))
+			return false;
+		if (vaccinations == null) {
+			if (other.vaccinations != null)
+				return false;
+		} else if (!vaccinations.equals(other.vaccinations))
+			return false;
+		if (Double.doubleToLongBits(weight) != Double
+				.doubleToLongBits(other.weight))
+			return false;
+		return true;
+	}
+	
 	
 }

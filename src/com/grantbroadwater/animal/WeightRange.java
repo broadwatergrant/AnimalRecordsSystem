@@ -41,16 +41,36 @@ public class WeightRange implements Comparable<WeightRange>{
 	public int compareTo(WeightRange weight){
 		return ((int)this.getRange()) - ((int)weight.getRange());
 	}
-	
+
 	@Override
-	public boolean equals(Object o){
-		WeightRange weight = new WeightRange();
-		if(o instanceof WeightRange)
-			weight = (WeightRange)o;
-		else
-			return false;
-		
-		return (this.getHigh() == weight.getHigh() && this.getLow() == weight.getLow());
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(high);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(low);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof WeightRange))
+			return false;
+		WeightRange other = (WeightRange) obj;
+		if (Double.doubleToLongBits(high) != Double
+				.doubleToLongBits(other.high))
+			return false;
+		if (Double.doubleToLongBits(low) != Double.doubleToLongBits(other.low))
+			return false;
+		return true;
+	}
+	
+	
 
 }

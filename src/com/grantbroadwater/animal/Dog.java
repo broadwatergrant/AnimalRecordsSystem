@@ -132,18 +132,90 @@ public class Dog extends Animal {
 	public String toString(){
 		return this.getBreed()+" dog; "+this.getName();
 	}
-	
+
 	@Override
-	public boolean equals(Object o){
-		@SuppressWarnings("unused")
-		Dog d = new Dog();
-		if(o instanceof Dog)
-			d = (Dog)o;
-		else
-			return false;
-		
-		// TODO Compare all instance variables between (this : Dog) and (d : Dog)
-		return false;
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime
+				* result
+				+ ((beginHeartwormDate == null) ? 0 : beginHeartwormDate
+						.hashCode());
+		result = prime * result + (bordetellaVaccination ? 1231 : 1237);
+		result = prime * result + ((breed == null) ? 0 : breed.hashCode());
+		result = prime * result + (distemperVaccination ? 1231 : 1237);
+		result = prime
+				* result
+				+ ((firstFleaTreatment == null) ? 0 : firstFleaTreatment
+						.hashCode());
+		result = prime * result + (fleaTest ? 1231 : 1237);
+		result = prime * result + (heartwormTest ? 1231 : 1237);
+		result = prime * result + (rabiesVaccination ? 1231 : 1237);
+		result = prime
+				* result
+				+ ((resetHeartwormDate == null) ? 0 : resetHeartwormDate
+						.hashCode());
+		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
+		result = prime
+				* result
+				+ ((spayedNeuterDate == null) ? 0 : spayedNeuterDate.hashCode());
+		result = prime * result + (spayedNeutered ? 1231 : 1237);
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (!(obj instanceof Dog))
+			return false;
+		Dog other = (Dog) obj;
+		if (beginHeartwormDate == null) {
+			if (other.beginHeartwormDate != null)
+				return false;
+		} else if (!beginHeartwormDate.equals(other.beginHeartwormDate))
+			return false;
+		if (bordetellaVaccination != other.bordetellaVaccination)
+			return false;
+		if (breed == null) {
+			if (other.breed != null)
+				return false;
+		} else if (!breed.equals(other.breed))
+			return false;
+		if (distemperVaccination != other.distemperVaccination)
+			return false;
+		if (firstFleaTreatment == null) {
+			if (other.firstFleaTreatment != null)
+				return false;
+		} else if (!firstFleaTreatment.equals(other.firstFleaTreatment))
+			return false;
+		if (fleaTest != other.fleaTest)
+			return false;
+		if (heartwormTest != other.heartwormTest)
+			return false;
+		if (rabiesVaccination != other.rabiesVaccination)
+			return false;
+		if (resetHeartwormDate == null) {
+			if (other.resetHeartwormDate != null)
+				return false;
+		} else if (!resetHeartwormDate.equals(other.resetHeartwormDate))
+			return false;
+		if (sex != other.sex)
+			return false;
+		if (spayedNeuterDate == null) {
+			if (other.spayedNeuterDate != null)
+				return false;
+		} else if (!spayedNeuterDate.equals(other.spayedNeuterDate))
+			return false;
+		if (spayedNeutered != other.spayedNeutered)
+			return false;
+		return true;
+	}
+	
+	
+	
+	
 	
 }
