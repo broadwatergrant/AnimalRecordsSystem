@@ -142,6 +142,7 @@ public class Dog extends Animal {
 		else
 			return false;
 		
+		// TODO Compare all instance variables between (this : Dog) and (d : Dog)
 		return false;
 	}
 	

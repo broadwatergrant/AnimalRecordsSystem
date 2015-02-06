@@ -69,6 +69,7 @@ public class Other extends Animal {
 		else
 			return false;
 		
+		// TODO Compare all instance variables between (this : Other) and (d : Other)
 		return false;
 		
 	}

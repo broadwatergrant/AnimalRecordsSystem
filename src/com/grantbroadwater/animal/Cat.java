@@ -135,6 +135,7 @@ public class Cat extends Animal {
 		else
 			return false;
 		
+		// TODO Compare all instance variables between (this : Cat) and (d : Cat)
 		return false;
 		
 	}
