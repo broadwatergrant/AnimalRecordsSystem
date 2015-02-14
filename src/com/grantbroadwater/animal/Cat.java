@@ -26,10 +26,10 @@ public class Cat extends Animal {
 	}
 
 	public Cat(String name, int age, Date dob, Date doa, Chip chip, String relinquishingParty,
-			int cageNumber, String caseNumber, CatBreed breed, Sex sex, boolean fleaTest, boolean declawed,
+			int cageNumber, CatBreed breed, Sex sex, boolean fleaTest, boolean declawed,
 			boolean felineLeukemiaTest, boolean rabiesVaccine) {
 		
-		super(name, AnimalType.CAT, age, dob, doa, chip, relinquishingParty,	cageNumber, caseNumber);
+		super(name, AnimalType.CAT, age, dob, doa, chip, relinquishingParty, cageNumber);
 		
 		setBreed(breed);
 		setSex(sex);
@@ -123,7 +123,7 @@ public class Cat extends Animal {
 	
 	@Override
 	public String toString(){
-		return this.getBreed()+" cat; "+this.getName();
+		return this.getBreed()+" cat: "+this.getName();
 	}
 
 	@Override

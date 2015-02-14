@@ -12,6 +12,7 @@ public abstract class Animal {
 	private String relinquishingParty;
 	private int cageNumber;
 	private String caseNumber;
+	private boolean quarentined;
 	
 	public Animal() {
 		setName("");
@@ -22,10 +23,10 @@ public abstract class Animal {
 		setChip(new Chip());
 		setRelinquishingParty("");
 		setCageNumber(0);
-		setCaseNumber("");
+		generateCaseNumber();
 	}
 	
-	public Animal(String name, AnimalType type, int age, Date dob, Date doa, Chip chip, String relinquishingParty, int cageNumber, String caseNumber){
+	public Animal(String name, AnimalType type, int age, Date dob, Date doa, Chip chip, String relinquishingParty, int cageNumber){
 		setName(name);
 		setType(type);
 		setAge(age);
@@ -34,7 +35,7 @@ public abstract class Animal {
 		setChip(chip);
 		setRelinquishingParty(relinquishingParty);
 		setCageNumber(cageNumber);
-		setCaseNumber(caseNumber);
+		generateCaseNumber();
 	}
 	
 	public String getName(){
@@ -96,10 +97,42 @@ public abstract class Animal {
 	public String getCaseNumber(){
 		return this.caseNumber;
 	}
-	public void setCaseNumber(String caseNumber){
+	public String setCaseNumber(String caseNumber){
 		this.caseNumber = caseNumber;
+		return this.caseNumber;
 	}
 	
+	public String generateCaseNumber(){
+		String pre = new String(isQuarentined() ? "Q" : "");
+		String type;
+		switch(this.type){
+		case DOG:
+			type = "D";
+			break;
+		case CAT:
+			type = "C";
+			break;
+		case OTHER:
+			type = "O";
+			break;
+		case UNDEFINED:
+			type = "X";
+			break;
+		default:
+			type = "!";
+			break;
+		}
+		return setCaseNumber(pre+type+hashCode());
+	}
+	
+	public boolean isQuarentined() {
+		return quarentined;
+	}
+
+	public void setQuarentined(boolean quarentined) {
+		this.quarentined = quarentined;
+	}
+
 	@Override
 	public abstract String toString();
 

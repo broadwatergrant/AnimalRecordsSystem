@@ -4,6 +4,12 @@ import java.io.File;
 
 import javax.swing.JOptionPane;
 
+import com.grantbroadwater.animal.Chip;
+import com.grantbroadwater.animal.Dog;
+import com.grantbroadwater.animal.DogBreed;
+import com.grantbroadwater.animal.HairType;
+import com.grantbroadwater.animal.Sex;
+import com.grantbroadwater.animal.WeightRange;
 import com.grantbroadwater.gui.ARSFrame;
 import com.grantbroadwater.gui.SetUpPanel;
 import com.grantbroadwater.staff.Staff;
@@ -34,6 +40,10 @@ public class AnimalRecordsSystem {
 			frame.setMainPanel(new SetUpPanel());
 		}
 		
+		@SuppressWarnings("deprecation")
+		Dog d = new Dog("Doug", 5, new java.util.Date(1999, 1, 1), new java.util.Date(2015, 1, 1), new Chip(), "Broadwaters", 55, new DogBreed("Retreiver", new WeightRange(60, 100), "Golden", HairType.LONG), Sex.MALE, true, true, true, true, true, true);
+		System.out.println(d);
+		System.out.println(d.getCaseNumber());
 		
 		new Log("Now closing AnimalRecordsSystem.");
 	}

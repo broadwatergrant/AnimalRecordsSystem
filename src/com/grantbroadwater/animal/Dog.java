@@ -28,10 +28,10 @@ public class Dog extends Animal {
 	}
 
 	public Dog(String name, int age, Date dob, Date doa, Chip chip, String relinquishingParty,
-			int cageNumber, String caseNumber, DogBreed breed, Sex sex, boolean spayedNeutered, boolean fleaTest, boolean heartwormTest,
+			int cageNumber, DogBreed breed, Sex sex, boolean spayedNeutered, boolean fleaTest, boolean heartwormTest,
 			boolean rabiesVaccination, boolean distemperVaccination, boolean bordetellaVaccination) {
 		
-		super(name, AnimalType.DOG, age, dob, doa, chip, relinquishingParty, cageNumber, caseNumber);
+		super(name, AnimalType.DOG, age, dob, doa, chip, relinquishingParty, cageNumber);
 		
 		setBreed(breed);
 		setSex(sex);
@@ -130,7 +130,7 @@ public class Dog extends Animal {
 	
 	@Override
 	public String toString(){
-		return this.getBreed()+" dog; "+this.getName();
+		return this.getBreed()+" dog: "+this.getName();
 	}
 
 	@Override

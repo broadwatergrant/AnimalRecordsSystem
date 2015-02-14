@@ -17,9 +17,9 @@ public class Other extends Animal {
 	}
 
 	public Other(String name, int age, Date dob, Date doa, Chip chip, String relinquishingParty, 
-			int cageNumber,String caseNumber, String species, double weight, String appearance, ArrayList<String> vaccinations) {
+			int cageNumber, String species, double weight, String appearance, ArrayList<String> vaccinations) {
 		
-		super(name, AnimalType.OTHER, age, dob, doa, chip, relinquishingParty, cageNumber, caseNumber);
+		super(name, AnimalType.OTHER, age, dob, doa, chip, relinquishingParty, cageNumber);
 
 		setSpecies(species);
 		setWeight(weight);
@@ -57,7 +57,7 @@ public class Other extends Animal {
 	
 	@Override
 	public String toString(){
-		return this.getSpecies()+"; "+this.getName();
+		return this.getSpecies()+": "+this.getName();
 	}
 
 	@Override
