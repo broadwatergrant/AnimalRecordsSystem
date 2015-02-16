@@ -114,8 +114,9 @@ public class ARSFrame extends JFrame {
                 "Exit Confirmation", JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, null, null);
         if (confirm == JOptionPane.YES_OPTION) {
-        	new Log("Now terminating application");
+        	AnimalRecordsSystem.getStaff().saveStaff();
         	AnimalRecordsSystem.getFrame().dispose();
+        	new Log("Now terminating application");
             System.exit(1);
         }
 	}

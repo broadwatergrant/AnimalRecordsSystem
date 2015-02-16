@@ -13,6 +13,7 @@ public abstract class Animal {
 	private int cageNumber;
 	private String caseNumber;
 	private boolean quarentined;
+	private boolean current;
 	
 	public Animal() {
 		setName("");
@@ -24,6 +25,7 @@ public abstract class Animal {
 		setRelinquishingParty("");
 		setCageNumber(0);
 		generateCaseNumber();
+		setCurrent(true);
 	}
 	
 	public Animal(String name, AnimalType type, int age, Date dob, Date doa, Chip chip, String relinquishingParty, int cageNumber){
@@ -36,6 +38,7 @@ public abstract class Animal {
 		setRelinquishingParty(relinquishingParty);
 		setCageNumber(cageNumber);
 		generateCaseNumber();
+		setCurrent(true);
 	}
 	
 	public String getName(){
@@ -131,6 +134,14 @@ public abstract class Animal {
 
 	public void setQuarentined(boolean quarentined) {
 		this.quarentined = quarentined;
+	}
+
+	public boolean isCurrent() {
+		return current;
+	}
+
+	public void setCurrent(boolean current) {
+		this.current = current;
 	}
 
 	@Override

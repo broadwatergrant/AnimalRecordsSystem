@@ -5,12 +5,7 @@ import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-import com.grantbroadwater.animal.Chip;
-import com.grantbroadwater.animal.Dog;
-import com.grantbroadwater.animal.DogBreed;
-import com.grantbroadwater.animal.HairType;
-import com.grantbroadwater.animal.Sex;
-import com.grantbroadwater.animal.WeightRange;
+import com.grantbroadwater.animal.Animals;
 import com.grantbroadwater.gui.ARSFrame;
 import com.grantbroadwater.gui.SetUpPanel;
 import com.grantbroadwater.gui.SignInPanel;
@@ -26,18 +21,20 @@ public class AnimalRecordsSystem {
 	private static Staff staff;
 	private static ARSFrame frame;
 	private static StaffMember currentUser;
+	private static Animals animals;
 	
 	
 	public static void main(String[] args) throws Exception {
 		new Log("Now running AnimalRecordsSystem.");
 		
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Exception e) {}
-		
+		// Initialize this instance of the animal records system
 		init();
+		
+		// Construct the frame
 		frame = new ARSFrame();
 		frame.setVisible(true);
+		
+		// Load Staff Members
 		staff = new Staff();
 		if(!staff.loadStaff()){
 			new Log("Failed to load staff", true);
@@ -49,15 +46,18 @@ public class AnimalRecordsSystem {
 			AnimalRecordsSystem.getFrame().setMainPanel(new SignInPanel());
 		}
 		
-		@SuppressWarnings("deprecation")
-		Dog d = new Dog("Doug", 5, new java.util.Date(1999, 1, 1), new java.util.Date(2015, 1, 1), new Chip(), "Broadwaters", 55, new DogBreed("Retreiver", new WeightRange(60, 100), "Golden", HairType.LONG), Sex.MALE, true, true, true, true, true, true);
-		System.out.println(d);
-		System.out.println(d.getCaseNumber());
+		// Initialize Animals
+		animals = new Animals();
 		
-		new Log("Now closing AnimalRecordsSystem.");
+		new Log("Main Thread Closing");
 	}
 	
+	// Initialize the animal records system
 	private static void init(){
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {}
+		
 		File homeDir = new File(homeDirecotry);
 		if(!homeDir.exists())
 			homeDir.mkdirs();
@@ -89,4 +89,7 @@ public class AnimalRecordsSystem {
 		return frame;
 	}
 
+	public static Animals getAnimals() {
+		return animals;
+	}
 }
