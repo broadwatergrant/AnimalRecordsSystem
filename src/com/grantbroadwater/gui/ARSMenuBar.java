@@ -3,6 +3,8 @@ package com.grantbroadwater.gui;
 import java.awt.*;
 import java.awt.event.*;
 
+import com.grantbroadwater.AnimalRecordsSystem;
+
 public class ARSMenuBar extends MenuBar {
 
 	/**
@@ -18,12 +20,19 @@ public class ARSMenuBar extends MenuBar {
 		// Menu Items
 		exit = new MenuItem("Exit Application");
 		exit.addActionListener(new ActionListener(){
+			@Override
 			public void actionPerformed(ActionEvent e){
 				ARSFrame.terminate();
 			}
 		});
 				
 		mStaff = new MenuItem("Manage Staff");
+		mStaff.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				AnimalRecordsSystem.getFrame().setMainPanel(new SetUpPanel());
+			}
+		});
 		mAnimals = new MenuItem("Manage Animals");
 				
 		// Menus

@@ -1,8 +1,12 @@
 package com.grantbroadwater.gui;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.*;
 
+import com.grantbroadwater.AnimalRecordsSystem;
 import com.grantbroadwater.util.Log;
 
 public class ARSFrame extends JFrame {
@@ -23,7 +27,13 @@ public class ARSFrame extends JFrame {
 		setMaximumSize(new Dimension(WIDTH+16, HEIGHT+59));
 		setSize(new Dimension(WIDTH+16, HEIGHT+59));
 		setLocation(new Point(25, 25));
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter(){
+			@Override
+			public void windowClosing(WindowEvent e){
+				ARSFrame.terminate();
+			}
+		});
 		
 		// Menu Bar
 		menuBar = new ARSMenuBar();
@@ -95,8 +105,19 @@ public class ARSFrame extends JFrame {
 	}
 
 	protected static void terminate(){
-		new Log("Now terminating application");
-		System.exit(0);
+		if(AnimalRecordsSystem.getFrame().getMainPanel() instanceof SignInPanel){
+			JOptionPane.showMessageDialog(null, "You must sign in to terminate the application");
+			return;
+		}
+		int confirm = JOptionPane.showOptionDialog(null,
+                "Are You Sure to Close this Application?",
+                "Exit Confirmation", JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, null, null);
+        if (confirm == JOptionPane.YES_OPTION) {
+        	new Log("Now terminating application");
+        	AnimalRecordsSystem.getFrame().dispose();
+            System.exit(1);
+        }
 	}
 
 

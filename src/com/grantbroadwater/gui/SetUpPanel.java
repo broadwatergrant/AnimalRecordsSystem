@@ -27,6 +27,9 @@ public class SetUpPanel extends JPanel {
 		setBackground(Color.WHITE);
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
+		// Frame
+		AnimalRecordsSystem.getFrame().showMenuBar();
+		
 		// Staff Members(info text) label
 		JLabel lbl_currStaff = new JLabel("Current Staff");
 		setFont(new Font(lbl_currStaff.getFont().getName(), Font.PLAIN, 16));
@@ -163,7 +166,10 @@ public class SetUpPanel extends JPanel {
 				btn_done.addActionListener(
 					new ActionListener(){
 						public void actionPerformed(ActionEvent e){
-							AnimalRecordsSystem.getStaff().saveStaff();
+							if (AnimalRecordsSystem.getStaff().saveStaff())
+								AnimalRecordsSystem.getFrame().setMainPanel(new SignInPanel());
+							else
+								JOptionPane.showMessageDialog(null, "Failed to save staff members");
 						}
 					}
 				);
