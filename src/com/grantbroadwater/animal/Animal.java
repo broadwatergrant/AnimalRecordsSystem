@@ -144,6 +144,21 @@ public abstract class Animal {
 		this.current = current;
 	}
 
+	public String getStringRepresentation(){
+		String result = this.getType()+":";
+		
+		result += this.getName()+":";
+		result += this.getAge()+":";
+		result += this.getDateOfBirth()+":";
+		result += this.getDateOfArrival()+":";
+		result += this.getChip().stringRepresentation()+":";
+		result += this.getRelinquishingParty()+":";
+		result += this.getCageNumber()+":";
+		result += this.getCaseNumber()+":";
+		
+		return result;
+	}
+	
 	@Override
 	public abstract String toString();
 

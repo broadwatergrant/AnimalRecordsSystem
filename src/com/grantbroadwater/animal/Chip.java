@@ -35,6 +35,32 @@ public final class Chip {
 		this.contactDate = null;
 	}
 	
+	@SuppressWarnings("deprecation")
+	public static Chip parseChip(String representation){
+		Chip result = null;
+		String[] parts = representation.split("-");
+		
+		boolean chipped = Boolean.parseBoolean(parts[0]);
+		if(chipped){
+			result = new Chip(parts[1], Integer.parseInt(parts[2]), new Date(parts[3])); // Owner, chip #, Contact Date
+		}else{
+			result = new Chip(Integer.parseInt(parts[1]), new Date(parts[2])); // Chip #, Implant Date
+		}
+		
+		return result;
+	}
+	
+	public String stringRepresentation(){
+		String result = isChipped()+"-";
+		
+		if(isChipped())
+			result += getOwner() + "-" + getChipNumber() + "-" + getContactDate();
+		else
+			result += getChipNumber() + "-" + getImplantDate();
+		
+		return result+";";
+	}
+	
 	public boolean isChipped(){
 		return this.chipped;
 	}

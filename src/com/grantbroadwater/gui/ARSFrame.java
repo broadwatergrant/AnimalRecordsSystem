@@ -97,6 +97,7 @@ public class ARSFrame extends JFrame {
 	}
 	
 	public void showMenuBar(){
+		menuBar = new ARSMenuBar();
 		setMenuBar(menuBar);
 	}
 	

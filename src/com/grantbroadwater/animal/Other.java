@@ -56,6 +56,18 @@ public class Other extends Animal {
 	}
 	
 	@Override
+	public String getStringRepresentation(){
+		String result = super.getStringRepresentation();
+		
+		result += this.getSpecies()+":";
+		result += this.getWeight()+":";
+		result += this.getAppearace()+":";
+		result += Arrays.toString(this.getVaccinations().toArray(new String[this.getVaccinations().size()]));
+		
+		return result+";";
+	}
+	
+	@Override
 	public String toString(){
 		return this.getSpecies()+": "+this.getName();
 	}

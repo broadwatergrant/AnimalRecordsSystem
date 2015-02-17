@@ -48,6 +48,34 @@ public abstract class Breed {
 		this.hairType = hairType;
 	}
 	
+	public static Breed parseBreed(String str){
+		String[] parts = str.split("-");
+		
+		Breed b = null;
+		if(parts[0].equalsIgnoreCase("Dog"))
+			b = new DogBreed();
+		else if(parts[0].equalsIgnoreCase("Cat"))
+			b = new CatBreed();
+		
+		b.setName(parts[1]);
+		b.setWeight(new WeightRange(parts[2]));
+		b.setHairColor(parts[3]);
+		
+		HairType type = HairType.UNDEFINED;
+		if(parts[4].equalsIgnoreCase("Long"))
+			type = HairType.LONG;
+		else if(parts[4].equals("Short"))
+			type = HairType.SHORT;
+		b.setHairType(type);
+		
+		return b;
+	}
+	
+	public String stringRepresentation(){
+		return getName() + "-" + getWeight().toString() + "-" + getHairColor() + "-" + getHairType();
+	}
+	
+	
 	@Override
 	public String toString(){
 		return this.name;

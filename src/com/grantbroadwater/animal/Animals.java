@@ -1,15 +1,167 @@
 package com.grantbroadwater.animal;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
+
+import com.grantbroadwater.AnimalRecordsSystem;
+import com.grantbroadwater.util.Log;
 
 public class Animals {
 
+	private static final String FILEPATH = 
+			AnimalRecordsSystem.homeDirecotry+"\\.animals";
+	private File animalFile;
+	
 	private ArrayList<Animal> current;
 	private ArrayList<Animal> past;
 
-	public Animals(){
+	public Animals() throws IOException{
 		setCurrent(new ArrayList<Animal>());
 		setPast(new ArrayList<Animal>());
+		animalFile = new File(FILEPATH);
+		if(!animalFile.exists()){
+			animalFile.createNewFile();
+			new Log("Staff File Created: "+animalFile.getAbsolutePath());
+		}
+	}
+	
+	public void clear(){
+		current.clear();
+		past.clear();
+	}
+	
+	public void addToAppropriateList(Animal a){
+		if(a.isCurrent())
+			addCurrentAnimal(a);
+		else
+			addPastAnimal(a);
+	}
+	
+	public void loadAnimals(){
+		try {
+			Scanner scan = new Scanner(animalFile, "UTF-8");
+			scan.useDelimiter(";");
+			this.clear();
+			while(scan.hasNext()){
+				addToAppropriateList(parseAnimal(scan.next()));
+			}
+			scan.close();
+			new Log(getAll().size()+" animals loaded");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	public Animal parseAnimal(String representation){
+		
+		String[] parts = representation.split(":");
+		String type = parts[0];
+		
+		if(type.equalsIgnoreCase("Dog"))
+			return parseDog(parts);
+		else if(type.equalsIgnoreCase("Cat"))
+			return parseCat(parts);
+		else if(type.equalsIgnoreCase("Other"))
+			return parseOther(parts);
+		
+		return null;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public Dog parseDog(String[] parts){
+		Dog result = new Dog();
+		
+		result = (Dog)addGenericTypes(result, parts);
+	
+		result.setBreed((DogBreed)Breed.parseBreed(parts[9]));
+		if(parts[10].equalsIgnoreCase("Male"))
+			result.setSex(Sex.MALE);
+		else if(parts[10].equalsIgnoreCase("Female"))
+			result.setSex(Sex.FEMALE);
+		result.setFleaTested(Boolean.parseBoolean(parts[11]));
+		result.setFirstFleaTreatment(new Date(parts[12]));
+		result.setHeartwormTested(Boolean.parseBoolean(parts[13]));
+		result.setBeginHeartwormDate(new Date(parts[14]));
+		result.setResetHeartwormDate(new Date(parts[15]));
+		result.setRabiesVaccinated(Boolean.parseBoolean(parts[16]));
+		result.setDistemperVaccinated(Boolean.parseBoolean(parts[17]));
+		result.setBordetellaVaccinated(Boolean.parseBoolean(parts[18]));
+		result.setCurrent(Boolean.parseBoolean(parts[19]));
+		result.setSpayedNeutered(Boolean.parseBoolean(parts[20]));
+		result.setSpayedNeuteredDate(new Date(parts[21]));
+		
+		return result;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public Cat parseCat(String[] parts){
+		Cat result = new Cat();
+		
+		result = (Cat)addGenericTypes(result, parts);
+		
+		result.setBreed((CatBreed)Breed.parseBreed(parts[9]));
+		if(parts[10].equalsIgnoreCase("Male"))
+			result.setSex(Sex.MALE);
+		else if(parts[10].equalsIgnoreCase("Female"))
+			result.setSex(Sex.FEMALE);
+		result.setSpayedNeutered(Boolean.parseBoolean(parts[11]));
+		result.setSpayedNeuterDate(new Date(parts[12]));
+		result.setFleaTested(Boolean.parseBoolean(parts[13]));
+		result.setFirstFleaTreatment(new Date(parts[14]));
+		result.setDeclawed(Boolean.parseBoolean(parts[15]));
+		if(parts[16].equalsIgnoreCase("TWO"))
+			result.setDecawingType(DeclawingType.TWO);
+		else if(parts[16].equalsIgnoreCase("FOUR"))
+			result.setDecawingType(DeclawingType.FOUR);
+		result.setFelineLeukemiaTested(Boolean.parseBoolean(parts[17]));
+		result.setFelineLeukemiaTestDate(new Date(parts[18]));
+		result.setRabiesVaccinated(Boolean.parseBoolean(parts[19]));
+		
+		return result;
+	}
+	
+	public Other parseOther(String[] parts){
+		Other result = new Other();
+		
+		result = (Other)addGenericTypes(result, parts);
+		
+		result.setSpecies(parts[9]);
+		result.setWeight(Double.parseDouble(parts[10]));
+		result.setAppearance(parts[11]);
+		result.setVaccinations(parseList(parts[12]));
+		
+		return result;
+	}
+	
+	private static ArrayList<String> parseList(String str){
+		ArrayList<String> result = new ArrayList<String>();
+		
+		str = str.replaceAll("[", "").replaceAll("]", "").trim();
+		String[] parts = str.split(",");
+		
+		for(String s : parts){
+			result.add(s);
+		}
+		
+		return result;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public static Animal addGenericTypes(Animal a, String[] parts){
+		
+		a.setName(parts[1]);
+		a.setAge(Integer.parseInt(parts[2]));
+		a.setDateOfBirth(new Date(parts[3]));
+		a.setDateOfArrival(new Date(parts[4]));
+		a.setChip(Chip.parseChip(parts[5]));
+		a.setRelinquishingParty(parts[6]);
+		a.setCageNumber(Integer.parseInt(parts[7]));
+		a.setCaseNumber(parts[8]);
+		
+		return a;
 	}
 
 	public ArrayList<Animal> getCurrent() {

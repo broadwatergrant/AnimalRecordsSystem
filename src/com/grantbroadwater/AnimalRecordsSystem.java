@@ -7,6 +7,7 @@ import javax.swing.UIManager;
 
 import com.grantbroadwater.animal.Animals;
 import com.grantbroadwater.gui.ARSFrame;
+import com.grantbroadwater.gui.HomePanel;
 import com.grantbroadwater.gui.SetUpPanel;
 import com.grantbroadwater.gui.SignInPanel;
 import com.grantbroadwater.staff.Staff;
@@ -22,6 +23,7 @@ public class AnimalRecordsSystem {
 	private static ARSFrame frame;
 	private static StaffMember currentUser;
 	private static Animals animals;
+	private static HomePanel homePanel;
 	
 	
 	public static void main(String[] args) throws Exception {
@@ -48,6 +50,9 @@ public class AnimalRecordsSystem {
 		
 		// Initialize Animals
 		animals = new Animals();
+		
+		// Home Panel
+		homePanel = new HomePanel();
 		
 		new Log("Main Thread Closing");
 	}
@@ -81,8 +86,13 @@ public class AnimalRecordsSystem {
 
 	public static void signUserIn(StaffMember currentUser){
 		setCurrentUser(currentUser);
-		JOptionPane.showMessageDialog(null, currentUser+" succesfully signed in");
-		// TODO: Present HomePanel
+		presentHomePanel();
+	}
+	
+	public static void presentHomePanel(){
+		homePanel.prep();
+		frame.setTitle(currentUser.getName());
+		frame.setMainPanel(homePanel);
 	}
 	
 	public static ARSFrame getFrame(){

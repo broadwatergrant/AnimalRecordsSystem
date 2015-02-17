@@ -39,6 +39,7 @@ public class SignInPanel extends JPanel {
 		
 		// Frame
 		AnimalRecordsSystem.getFrame().removeMenuBar();
+		AnimalRecordsSystem.getFrame().setTitle("Animal Records System");
 		
 		// Logo
 		try {

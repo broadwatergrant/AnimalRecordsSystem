@@ -6,12 +6,18 @@ public class WeightRange implements Comparable<WeightRange>{
 	
 	public WeightRange(){
 		setLow(0.0);
-		setHight(0.0);
+		setHigh(0.0);
 	}
 	
 	public WeightRange(double low, double high){
 		setLow(low);
-		setHight(high);
+		setHigh(high);
+	}
+	
+	public WeightRange(String fromString){
+		fromString.replaceAll("[", "").replaceAll("]", "").trim();
+		setLow(Integer.parseInt(fromString.split(",")[0]));
+		setHigh(Integer.parseInt(fromString.split(",")[1]));
 	}
 	
 	public double getLow(){
@@ -24,7 +30,7 @@ public class WeightRange implements Comparable<WeightRange>{
 	public double getHigh(){
 		return this.high;
 	}
-	public void setHight(double high){
+	public void setHigh(double high){
 		this.high = high;
 	}
 	
