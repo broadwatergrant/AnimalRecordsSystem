@@ -125,16 +125,16 @@ public class Cat extends Animal {
 	public String getStringRepresentation(){
 		String result = super.getStringRepresentation();
 		
-		result += this.getBreed().stringRepresentation()+":";
-		result += this.getSex()+":";
-		result += this.isSpayedNeutered()+":";
-		result += this.getSpayedNeuterDate()+":";
-		result += this.isFleaTested()+":";
-		result += this.getFirstFleaTreatment()+":";
-		result += this.isDeclawed()+":";
-		result += this.getDecawingType()+":";
-		result += this.isFelineLeukemiaTested()+":";
-		result += this.getFelineLeukemiaTestDate()+":";
+		result += this.getBreed().stringRepresentation()+"~";
+		result += this.getSex()+"~";
+		result += this.isSpayedNeutered()+"~";
+		result += this.getSpayedNeuterDate()+"~";
+		result += this.isFleaTested()+"~";
+		result += this.getFirstFleaTreatment()+"~";
+		result += this.isDeclawed()+"~";
+		result += this.getDecawingType()+"~";
+		result += this.isFelineLeukemiaTested()+"~";
+		result += this.getFelineLeukemiaTestDate()+"~";
 		result += this.isRabiesVaccinated();
 		
 		return result+";";

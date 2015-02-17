@@ -1,11 +1,19 @@
 package com.grantbroadwater;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import com.grantbroadwater.animal.Animals;
+import com.grantbroadwater.animal.Chip;
+import com.grantbroadwater.animal.Dog;
+import com.grantbroadwater.animal.DogBreed;
+import com.grantbroadwater.animal.HairType;
+import com.grantbroadwater.animal.Sex;
+import com.grantbroadwater.animal.WeightRange;
 import com.grantbroadwater.gui.ARSFrame;
 import com.grantbroadwater.gui.HomePanel;
 import com.grantbroadwater.gui.SetUpPanel;
@@ -26,6 +34,7 @@ public class AnimalRecordsSystem {
 	private static HomePanel homePanel;
 	
 	
+	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws Exception {
 		new Log("Now running AnimalRecordsSystem.");
 		
@@ -53,6 +62,13 @@ public class AnimalRecordsSystem {
 		
 		// Home Panel
 		homePanel = new HomePanel();
+		
+		Dog d = new Dog("Doug", 23, new Date(1999, 1, 1), new Date(), new Chip(), "Broads", 457, new DogBreed("Retreiver", new WeightRange(20, 30), "Golden", HairType.SHORT), Sex.MALE, true, true, true, true, true, true);
+		animals.addCurrentAnimal(d);
+		animals.saveAnimals();
+		animals.clear();
+		animals.loadAnimals();
+		System.out.println(Arrays.toString(animals.getAll().toArray()));
 		
 		new Log("Main Thread Closing");
 	}

@@ -2,6 +2,7 @@ package com.grantbroadwater.animal;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -46,19 +47,40 @@ public class Animals {
 			scan.useDelimiter(";");
 			this.clear();
 			while(scan.hasNext()){
-				addToAppropriateList(parseAnimal(scan.next()));
+				String s = scan.next();
+				System.out.println("Scanned in: "+s);
+				Animal a = parseAnimal(s);
+				System.out.println("Converted to: "+a);
+				addToAppropriateList(a);
 			}
 			scan.close();
-			new Log(getAll().size()+" animals loaded");
+			new Log(getAll().size()+" animals loaded.");
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+	
+	public void saveAnimals(){
+		try {
+			PrintWriter writer = new PrintWriter(animalFile, "UTF-8");
+			
+			for(Animal a : getAll()){
+				writer.print(a.getStringRepresentation());
+			}
+			
+			writer.close();
+			new Log(getAll().size()+" animals saved.");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
 	
 	public Animal parseAnimal(String representation){
-		
-		String[] parts = representation.split(":");
+		String[] parts = representation.split("~");
 		String type = parts[0];
+		
+		System.out.println("Deciphered type as: "+type);
 		
 		if(type.equalsIgnoreCase("Dog"))
 			return parseDog(parts);

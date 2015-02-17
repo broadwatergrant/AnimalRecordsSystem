@@ -11,7 +11,7 @@ public final class Chip {
 	
 	public Chip(){
 		chipped = false;
-		chipNumber = -1;
+		chipNumber = 0;
 		owner = null;
 		contactDate = null;
 		implantDate = null;
@@ -58,7 +58,7 @@ public final class Chip {
 		else
 			result += getChipNumber() + "-" + getImplantDate();
 		
-		return result+";";
+		return result;
 	}
 	
 	public boolean isChipped(){
