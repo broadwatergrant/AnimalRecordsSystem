@@ -47,9 +47,7 @@ public class Animals {
 			this.clear();
 			while(scan.hasNext()){
 				String s = scan.next();
-				System.out.println("Scanned in: "+s);
 				Animal a = parseAnimal(s);
-				System.out.println("Converted to: "+a);
 				addToAppropriateList(a);
 			}
 			scan.close();

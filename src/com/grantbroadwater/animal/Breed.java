@@ -49,7 +49,6 @@ public abstract class Breed {
 	}
 	
 	public static Breed parseBreed(String str){
-		System.out.println("Breed String: "+str);
 		String[] parts = str.split("-");
 		
 		Breed b = null;
