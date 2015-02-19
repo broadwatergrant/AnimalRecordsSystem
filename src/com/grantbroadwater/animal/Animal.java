@@ -149,14 +149,35 @@ public abstract class Animal {
 		
 		result += this.getName()+"~";
 		result += this.getAge()+"~";
-		result += this.getDateOfBirth()+"~";
-		result += this.getDateOfArrival()+"~";
+		result += printDate(getDateOfBirth())+"~";
+		result += printDate(getDateOfArrival())+"~";
 		result += this.getChip().stringRepresentation()+"~";
 		result += this.getRelinquishingParty()+"~";
 		result += this.getCageNumber()+"~";
 		result += this.getCaseNumber()+"~";
 		
 		return result;
+	}
+	
+	@SuppressWarnings("deprecation")
+	protected static String printDate(Date d){
+		if(d == null)
+			return "null";
+		return d.getMonth()+"/"+d.getDate()+"/"+d.getYear();
+	}
+	
+	@SuppressWarnings("deprecation")
+	protected static Date parseDate(String str){
+		if(str.equals("null"))
+			return null;
+		String[] parts = str.split("/");
+		
+		Date d = new Date();
+		d.setMonth(Integer.parseInt(parts[0]));
+		d.setDate(Integer.parseInt(parts[1]));
+		d.setYear(Integer.parseInt(parts[2]));
+		
+		return d;
 	}
 	
 	@Override

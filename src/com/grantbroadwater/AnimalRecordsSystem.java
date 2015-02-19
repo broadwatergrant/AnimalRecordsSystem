@@ -64,10 +64,13 @@ public class AnimalRecordsSystem {
 		homePanel = new HomePanel();
 		
 		Dog d = new Dog("Doug", 23, new Date(1999, 1, 1), new Date(), new Chip(), "Broads", 457, new DogBreed("Retreiver", new WeightRange(20, 30), "Golden", HairType.SHORT), Sex.MALE, true, true, true, true, true, true);
+		System.out.println(d.getStringRepresentation());
 		animals.addCurrentAnimal(d);
+		System.out.println(animals.getAll().size());
 		animals.saveAnimals();
 		animals.clear();
 		animals.loadAnimals();
+		System.out.println(animals.getCurrentDogs().get(0).getStringRepresentation());
 		System.out.println(Arrays.toString(animals.getAll().toArray()));
 		
 		new Log("Main Thread Closing");

@@ -15,9 +15,9 @@ public class WeightRange implements Comparable<WeightRange>{
 	}
 	
 	public WeightRange(String fromString){
-		fromString.replaceAll("[", "").replaceAll("]", "").trim();
-		setLow(Integer.parseInt(fromString.split(",")[0]));
-		setHigh(Integer.parseInt(fromString.split(",")[1]));
+		fromString = fromString.substring(1, fromString.length()-2);
+		setLow(Double.parseDouble(fromString.split(",")[0]));
+		setHigh(Double.parseDouble(fromString.split(",")[1]));
 	}
 	
 	public double getLow(){

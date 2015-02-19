@@ -49,6 +49,7 @@ public abstract class Breed {
 	}
 	
 	public static Breed parseBreed(String str){
+		System.out.println("Breed String: "+str);
 		String[] parts = str.split("-");
 		
 		Breed b = null;
@@ -61,10 +62,10 @@ public abstract class Breed {
 		b.setWeight(new WeightRange(parts[2]));
 		b.setHairColor(parts[3]);
 		
-		HairType type = HairType.UNDEFINED;
-		if(parts[4].equalsIgnoreCase("Long"))
+		HairType type = null;
+		if(parts[4].equalsIgnoreCase("LONG"))
 			type = HairType.LONG;
-		else if(parts[4].equals("Short"))
+		else if(parts[4].equals("SHORT"))
 			type = HairType.SHORT;
 		b.setHairType(type);
 		
@@ -72,7 +73,13 @@ public abstract class Breed {
 	}
 	
 	public String stringRepresentation(){
-		return getName() + "-" + getWeight().toString() + "-" + getHairColor() + "-" + getHairType();
+		String pre = "";
+		if(this instanceof DogBreed)
+			pre = "Dog";
+		else if(this instanceof CatBreed)
+			pre = "Cat";
+		
+		return pre + "-" + getName() + "-" + getWeight().toString() + "-" + getHairColor() + "-" + getHairType();
 	}
 	
 	

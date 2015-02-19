@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 import com.grantbroadwater.AnimalRecordsSystem;
@@ -80,8 +79,6 @@ public class Animals {
 		String[] parts = representation.split("~");
 		String type = parts[0];
 		
-		System.out.println("Deciphered type as: "+type);
-		
 		if(type.equalsIgnoreCase("Dog"))
 			return parseDog(parts);
 		else if(type.equalsIgnoreCase("Cat"))
@@ -92,37 +89,37 @@ public class Animals {
 		return null;
 	}
 	
-	@SuppressWarnings("deprecation")
 	public Dog parseDog(String[] parts){
 		Dog result = new Dog();
 		
 		result = (Dog)addGenericTypes(result, parts);
-	
+		result.setType(AnimalType.DOG);
+		
 		result.setBreed((DogBreed)Breed.parseBreed(parts[9]));
 		if(parts[10].equalsIgnoreCase("Male"))
 			result.setSex(Sex.MALE);
 		else if(parts[10].equalsIgnoreCase("Female"))
 			result.setSex(Sex.FEMALE);
 		result.setFleaTested(Boolean.parseBoolean(parts[11]));
-		result.setFirstFleaTreatment(new Date(parts[12]));
+		result.setFirstFleaTreatment(Animal.parseDate(parts[12]));
 		result.setHeartwormTested(Boolean.parseBoolean(parts[13]));
-		result.setBeginHeartwormDate(new Date(parts[14]));
-		result.setResetHeartwormDate(new Date(parts[15]));
+		result.setBeginHeartwormDate(Animal.parseDate(parts[14]));
+		result.setResetHeartwormDate(Animal.parseDate(parts[15]));
 		result.setRabiesVaccinated(Boolean.parseBoolean(parts[16]));
 		result.setDistemperVaccinated(Boolean.parseBoolean(parts[17]));
 		result.setBordetellaVaccinated(Boolean.parseBoolean(parts[18]));
 		result.setCurrent(Boolean.parseBoolean(parts[19]));
 		result.setSpayedNeutered(Boolean.parseBoolean(parts[20]));
-		result.setSpayedNeuteredDate(new Date(parts[21]));
+		result.setSpayedNeuteredDate(Animal.parseDate(parts[21]));
 		
 		return result;
 	}
 	
-	@SuppressWarnings("deprecation")
 	public Cat parseCat(String[] parts){
 		Cat result = new Cat();
 		
 		result = (Cat)addGenericTypes(result, parts);
+		result.setType(AnimalType.CAT);
 		
 		result.setBreed((CatBreed)Breed.parseBreed(parts[9]));
 		if(parts[10].equalsIgnoreCase("Male"))
@@ -130,16 +127,16 @@ public class Animals {
 		else if(parts[10].equalsIgnoreCase("Female"))
 			result.setSex(Sex.FEMALE);
 		result.setSpayedNeutered(Boolean.parseBoolean(parts[11]));
-		result.setSpayedNeuterDate(new Date(parts[12]));
+		result.setSpayedNeuterDate(Animal.parseDate(parts[12]));
 		result.setFleaTested(Boolean.parseBoolean(parts[13]));
-		result.setFirstFleaTreatment(new Date(parts[14]));
+		result.setFirstFleaTreatment(Animal.parseDate(parts[14]));
 		result.setDeclawed(Boolean.parseBoolean(parts[15]));
 		if(parts[16].equalsIgnoreCase("TWO"))
 			result.setDecawingType(DeclawingType.TWO);
 		else if(parts[16].equalsIgnoreCase("FOUR"))
 			result.setDecawingType(DeclawingType.FOUR);
 		result.setFelineLeukemiaTested(Boolean.parseBoolean(parts[17]));
-		result.setFelineLeukemiaTestDate(new Date(parts[18]));
+		result.setFelineLeukemiaTestDate(Animal.parseDate(parts[18]));
 		result.setRabiesVaccinated(Boolean.parseBoolean(parts[19]));
 		
 		return result;
@@ -149,6 +146,7 @@ public class Animals {
 		Other result = new Other();
 		
 		result = (Other)addGenericTypes(result, parts);
+		result.setType(AnimalType.OTHER);
 		
 		result.setSpecies(parts[9]);
 		result.setWeight(Double.parseDouble(parts[10]));
@@ -171,13 +169,12 @@ public class Animals {
 		return result;
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static Animal addGenericTypes(Animal a, String[] parts){
 		
 		a.setName(parts[1]);
 		a.setAge(Integer.parseInt(parts[2]));
-		a.setDateOfBirth(new Date(parts[3]));
-		a.setDateOfArrival(new Date(parts[4]));
+		a.setDateOfBirth(Animal.parseDate(parts[3]));
+		a.setDateOfArrival(Animal.parseDate(parts[4]));
 		a.setChip(Chip.parseChip(parts[5]));
 		a.setRelinquishingParty(parts[6]);
 		a.setCageNumber(Integer.parseInt(parts[7]));

@@ -135,16 +135,16 @@ public class Dog extends Animal {
 		result += this.getBreed().stringRepresentation()+"~";
 		result += this.getSex()+"~";
 		result += this.isFleaTested()+"~";
-		result += this.getFirstFleaTreatment()+"~";
+		result += printDate(getFirstFleaTreatment())+"~";
 		result += this.isHeartwormTested()+"~";
-		result += this.getBeginHeartwormDate()+"~";
-		result += this.getResetHeartwormDate()+"~";
+		result += printDate(getBeginHeartwormDate())+"~";
+		result += printDate(getResetHeartwormDate())+"~";
 		result += this.isRabiesVaccinated()+"~";
 		result += this.isDistemperVaccinated()+"~";
 		result += this.isBordetellaVaccinated()+"~";
 		result += this.isCurrent()+"~";
 		result += this.isSpayedNeutered()+"~";
-		result += this.getSpayedNeuteredDate();
+		result += printDate(getSpayedNeuteredDate());
 		
 		return result+";";
 	}

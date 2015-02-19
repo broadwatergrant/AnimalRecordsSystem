@@ -62,7 +62,8 @@ public class Other extends Animal {
 		result += this.getSpecies()+"~";
 		result += this.getWeight()+"~";
 		result += this.getAppearace()+"~";
-		result += Arrays.toString(this.getVaccinations().toArray(new String[this.getVaccinations().size()]));
+		result += Arrays.toString(this.getVaccinations().toArray(new String[this.getVaccinations().size()]))+"~";
+		result += this.isCurrent();
 		
 		return result+";";
 	}
