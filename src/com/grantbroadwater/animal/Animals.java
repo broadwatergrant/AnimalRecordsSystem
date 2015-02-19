@@ -324,7 +324,7 @@ public class Animals {
 		return result;
 	}
 	
-	public ArrayList<Other> getAllOther(){
+	public ArrayList<Other> getAllOthers(){
 		ArrayList<Other> result = new ArrayList<Other>();
 		
 		for(Animal a : current)
@@ -336,6 +336,120 @@ public class Animals {
 				result.add((Other)a);
 		
 		return result;
+	}
+	
+	/* ----- */
+	
+	public String[] getAllCurrentCaseNumbers(){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		for(Animal a : getCurrent())
+			list.add(a.getCaseNumber());
+		
+		return list.toArray(new String[list.size()]);
+	}
+	
+	public String[] getCurrentDogCaseNumbers(){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		for(Dog d : getCurrentDogs())
+			list.add(d.getCaseNumber());
+		
+		return list.toArray(new String[list.size()]);
+	}
+	
+	public String[] getCurrentCatCaseNumbers(){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		for(Cat c : getCurrentCats())
+			list.add(c.getCaseNumber());
+		
+		return list.toArray(new String[list.size()]);
+	}
+	
+	public String[] getCurrentOtherCaseNumbers(){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		for(Other o : getCurrentOthers())
+			list.add(o.getCaseNumber());
+		
+		return list.toArray(new String[list.size()]);
+	}
+	
+	/* ----- */
+	
+	public String[] getAllPastCaseNumbers(){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		for(Animal a : getPast())
+			list.add(a.getCaseNumber());
+		
+		return list.toArray(new String[list.size()]);
+	}
+	
+	public String[] getPastDogCaseNumbers(){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		for(Dog d : getPastDogs())
+			list.add(d.getCaseNumber());
+		
+		return list.toArray(new String[list.size()]);
+	}
+	
+	public String[] getPastCatCaseNumbers(){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		for(Cat c : getPastCats())
+			list.add(c.getCaseNumber());
+		
+		return list.toArray(new String[list.size()]);
+	}
+	
+	public String[] getPastOtherCaseNumbers(){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		for(Other o : getPastOthers())
+			list.add(o.getCaseNumber());
+		
+		return list.toArray(new String[list.size()]);
+	}
+	
+	/* ----- */
+	
+	public String[] getAllCaseNumbers(){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		for(Animal a : getAll())
+			list.add(a.getCaseNumber());
+		
+		return list.toArray(new String[list.size()]);
+	}
+	
+	public String[] getAllDogCaseNumbers(){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		for(Dog d : getAllDogs())
+			list.add(d.getCaseNumber());
+		
+		return list.toArray(new String[list.size()]);
+	}
+	
+	public String[] getAllCatCaseNumbers(){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		for(Cat c : getAllCats())
+			list.add(c.getCaseNumber());
+		
+		return list.toArray(new String[list.size()]);
+	}
+	
+	public String[] getAllOtherCaseNumbers(){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		for(Other o : getAllOthers())
+			list.add(o.getCaseNumber());
+		
+		return list.toArray(new String[list.size()]);
 	}
 	
 }

@@ -89,9 +89,8 @@ public class AnimalRecordsSystem {
 	}
 	
 	public static void presentHomePanel(){
-		homePanel.prep();
 		frame.setTitle(currentUser.getName());
-		frame.setMainPanel(homePanel);
+		homePanel.prepAndShow();
 	}
 	
 	public static ARSFrame getFrame(){
