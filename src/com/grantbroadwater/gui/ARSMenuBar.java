@@ -46,7 +46,14 @@ public class ARSMenuBar extends MenuBar {
 					JOptionPane.showMessageDialog(null, "Insufficient security clearance", "Restricted", JOptionPane.ERROR_MESSAGE);
 			}
 		});
+		
 		mAnimals = new MenuItem("Manage Animals");
+		mAnimals.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AnimalRecordsSystem.presentHomePanel();
+			}
+		});
 				
 		// Menus
 		ars = new Menu("Animal Records System");
