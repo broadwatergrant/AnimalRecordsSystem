@@ -160,14 +160,14 @@ public abstract class Animal {
 	}
 	
 	@SuppressWarnings("deprecation")
-	protected static String printDate(Date d){
+	public static String printDate(Date d){
 		if(d == null)
 			return "null";
 		return d.getMonth()+"/"+d.getDate()+"/"+d.getYear();
 	}
 	
 	@SuppressWarnings("deprecation")
-	protected static Date parseDate(String str){
+	public static Date parseDate(String str){
 		if(str.equals("null"))
 			return null;
 		String[] parts = str.split("/");

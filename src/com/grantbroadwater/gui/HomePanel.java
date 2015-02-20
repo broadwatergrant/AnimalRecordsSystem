@@ -22,6 +22,7 @@ public class HomePanel extends JPanel {
 	private static final String newPrompt = "Create New Animal";
 
 	private JComboBox<String> animalComboBox;
+	private BasicInfoPanel basicInfoPanel;
 	
 	public HomePanel() {
 		super(null);
@@ -50,6 +51,12 @@ public class HomePanel extends JPanel {
 		});
 		add(enter);
 		
+		
+		// Basic Info Panel
+		basicInfoPanel = new BasicInfoPanel();
+		basicInfoPanel.setLocation(10, 200);
+		basicInfoPanel.setSize(325, 350);
+		add(basicInfoPanel);
 	}
 	
 	public void prep(){
@@ -80,7 +87,7 @@ public class HomePanel extends JPanel {
 	}
 	
 	private void actionPerformedOnComboBox(){
-		
+		// TODO: Event Handler
 	}
 	
 	private String[] prependArray(String[] array, String message){
