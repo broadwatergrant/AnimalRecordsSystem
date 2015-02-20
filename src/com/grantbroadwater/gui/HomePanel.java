@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -36,6 +37,19 @@ public class HomePanel extends JPanel {
 		title.setLocation(250,25);
 		add(title);
 		
+		// Enter button
+		JButton enter = new JButton("Enter");
+		enter.setFont(new Font(enter.getFont().getName(), Font.PLAIN, 16));
+		enter.setLocation(475, 100);
+		enter.setSize(100, 30);
+		enter.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO: Enter event handler
+			}
+		});
+		add(enter);
+		
 	}
 	
 	public void prep(){
@@ -46,8 +60,9 @@ public class HomePanel extends JPanel {
 		if(animalComboBox != null)
 			remove(animalComboBox);
 		animalComboBox = new JComboBox<String>(prependArray(AnimalRecordsSystem.getAnimals().getAllCurrentCaseNumbers(), newPrompt));
+		animalComboBox.setEditable(true);
 		animalComboBox.setFont(new Font(animalComboBox.getFont().getName(), Font.PLAIN, 16));
-		animalComboBox.setLocation(200, 100);
+		animalComboBox.setLocation(250, 100);
 		animalComboBox.setSize(200, 30);
 		animalComboBox.setSelectedItem(newPrompt);
 		animalComboBox.addActionListener(new ActionListener(){
