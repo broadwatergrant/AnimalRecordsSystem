@@ -25,12 +25,28 @@ public class Animals {
 		if(!animalFile.exists()){
 			animalFile.createNewFile();
 			new Log("Staff File Created: "+animalFile.getAbsolutePath());
+		}else{
+			loadAnimals();
 		}
 	}
 	
 	public void clear(){
 		current.clear();
 		past.clear();
+	}
+	
+	public void replace(Animal a, Animal b){
+		for(int i=0; i<current.size(); i++){
+			if(current.get(i).equals(a)){
+				current.set(i, b);
+			}
+		}
+		for(int i=0; i<past.size(); i++){
+			if(past.get(i).equals(a)){
+				past.set(i, b);
+			}
+		}
+		throw new IllegalArgumentException("No referance to "+a.getName());
 	}
 	
 	public void addToAppropriateList(Animal a){
@@ -48,6 +64,7 @@ public class Animals {
 			while(scan.hasNext()){
 				String s = scan.next();
 				Animal a = parseAnimal(s);
+				a.generateCaseNumber();
 				addToAppropriateList(a);
 			}
 			scan.close();

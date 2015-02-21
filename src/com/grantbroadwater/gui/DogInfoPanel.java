@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
-import java.util.jar.Attributes.Name;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -310,7 +309,7 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		spayedNeuteredComboBox.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				spayedNeuteredTextField.setEnabled((Boolean)spayedNeuteredComboBox.getSelectedItem());
+				spayedNeuteredTextField.setEnabled(!(Boolean)spayedNeuteredComboBox.getSelectedItem());
 				spayedNeuteredTextField.setText("mm/dd/yyyy");
 			}
 		});
@@ -345,6 +344,14 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		wrHighTextField.setText(""+breed.getWeight().getHigh());
 		hairColorTextField.setText(breed.getHairColor());
 		hairTypeComboBox.setSelectedItem(breed.getHairType());
+	}
+	
+	public Sex getSex(){
+		return (Sex)sexComboBox.getSelectedItem();
+	}
+	
+	public void setSex(Sex sex){
+		sexComboBox.setSelectedItem(sex);
 	}
 	
 	public boolean getFleaTested(){

@@ -12,6 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.grantbroadwater.AnimalRecordsSystem;
+import com.grantbroadwater.animal.AnimalType;
+import com.grantbroadwater.animal.Animals;
+import com.grantbroadwater.animal.Chip;
+import com.grantbroadwater.animal.Dog;
 
 public class HomePanel extends JPanel {
 
@@ -132,7 +136,63 @@ public class HomePanel extends JPanel {
 	}
 	
 	private void saveAnimalFromGUI(){
-		
+		Animals animals = AnimalRecordsSystem.getAnimals();
+		switch(basicInfoPanel.getType()){
+		case DOG:
+			animals.addCurrentAnimal(getDogFromGUI());
+			break;
+		case CAT:
+			
+			break;
+		case OTHER:
+			
+			break;
+		default:
+			return;
+		}
+		AnimalRecordsSystem.getAnimals().saveAnimals();
+		AnimalRecordsSystem.presentHomePanel();
 	}
 
+	private Dog getDogFromGUI(){
+		Dog d = new Dog();
+		
+		// Animal General
+		d.setName(basicInfoPanel.getName());
+		d.setType(AnimalType.DOG);
+		d.setAge(basicInfoPanel.getAge());
+		d.setDateOfBirth(basicInfoPanel.getDateOfBirth());
+		d.setDateOfArrival(basicInfoPanel.getDateOfArrival());
+		d.setRelinquishingParty(basicInfoPanel.getRelinquishingParty());
+		d.setCageNumber(basicInfoPanel.getCageNumber());
+		if(basicInfoPanel.getChipped())
+			d.setChip(new Chip(basicInfoPanel.getChipOwner(), basicInfoPanel.getChipNumber(), basicInfoPanel.getChipDate()));
+		else
+			d.setChip(new Chip(basicInfoPanel.getChipNumber(), basicInfoPanel.getChipDate()));
+		
+		// Dog Specific
+		DogInfoPanel DIP = (DogInfoPanel)specificInfoPanel;
+		d.setBreed(DIP.getBreed());
+		d.setSex(DIP.getSex());
+		d.setFleaTested(DIP.getFleaTested());
+		if(d.isFleaTested())
+			d.setFirstFleaTreatment(DIP.getFleaTestDate());
+		d.setHeartwormTested(DIP.getHeartwormTested());
+		if(d.isHeartwormTested()){
+			d.setBeginHeartwormDate(DIP.getFirstHeartwormTreatment());
+			d.setResetHeartwormDate(DIP.getResetHeartwormTreatment());
+		}
+		d.setRabiesVaccinated(DIP.getRabiesVaccinated());
+		// TODO: Rabies Date
+		d.setDistemperVaccinated(DIP.getDistemperVaccinated());
+		// TODO: Distemper Date
+		d.setBordetellaVaccinated(DIP.getBordetellaVaccinated());
+		// TODO: Bordetella Date
+		d.setSpayedNeutered(DIP.getSpayedNeutered());
+		if(!d.isSpayedNeutered())
+			d.setSpayedNeuteredDate(DIP.getSpayedNeuteredDate());
+		
+		return d;
+	}
+	
 }

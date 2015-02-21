@@ -5,7 +5,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
@@ -310,7 +310,39 @@ public class BasicInfoPanel extends JPanel {
 	
 	public void setCageNumber(int cageNumber){
 		this.cageTextField.setText(""+cageNumber);
-		
+	}
+	
+	public boolean getChipped(){
+		return (boolean)this.chippedComboBox.getSelectedItem();
+	}
+	
+	public void setChippped(boolean value){
+		chippedComboBox.setSelectedItem(value);
+	}
+	
+	public int getChipNumber(){
+		return Integer.parseInt(chipNumberTextField.getText());
+	}
+	
+	public void setChipNumber(int number){
+		chipNumberTextField.setText(""+number);
+	}
+	
+	public Date getChipDate(){
+		return Animal.parseDate(dateTextField.getText());
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void setChipDate(Date date){
+		dateTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+	}
+	
+	public String getChipOwner(){
+		return ownerTextField.getText();
+	}
+	
+	public void setChipOwner(String owner){
+		ownerTextField.setText(owner);
 	}
 	
 	public boolean allFieldsReady(){

@@ -25,7 +25,7 @@ public abstract class Animal {
 		setRelinquishingParty("");
 		setCageNumber(0);
 		generateCaseNumber();
-		setCurrent(true);
+		setCurrent(true);			
 	}
 	
 	public Animal(String name, AnimalType type, int age, Date dob, Date doa, Chip chip, String relinquishingParty, int cageNumber){
@@ -51,7 +51,7 @@ public abstract class Animal {
 	public AnimalType getType(){
 		return this.type;
 	}
-	protected void setType(AnimalType type){
+	public void setType(AnimalType type){
 		this.type = type;
 	}
 	
