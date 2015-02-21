@@ -1,11 +1,13 @@
 package com.grantbroadwater.gui;
 
 import java.awt.Color;
+import java.awt.Component;
 
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class SpecificInfoPanel extends JPanel {
+public abstract class SpecificInfoPanel extends JPanel {
 
 	
 	/**
@@ -22,4 +24,6 @@ public class SpecificInfoPanel extends JPanel {
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
 	}
+	
+	public abstract boolean allFieldsReady();
 }

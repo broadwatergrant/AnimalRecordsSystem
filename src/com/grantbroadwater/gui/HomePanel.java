@@ -22,8 +22,10 @@ public class HomePanel extends JPanel {
 	private static final String newPrompt = "Create New Animal";
 
 	private JComboBox<String> animalComboBox;
+	private JButton enter;
 	private BasicInfoPanel basicInfoPanel;
 	private SpecificInfoPanel specificInfoPanel;
+	private JButton saveButton;
 	
 	public HomePanel() {
 		super(null);
@@ -40,7 +42,7 @@ public class HomePanel extends JPanel {
 		add(title);
 		
 		// Enter button
-		JButton enter = new JButton("Enter");
+		enter = new JButton("Enter");
 		enter.setFont(new Font(enter.getFont().getName(), Font.PLAIN, 16));
 		enter.setLocation(475, 100);
 		enter.setSize(100, 30);
@@ -64,6 +66,19 @@ public class HomePanel extends JPanel {
 		specificInfoPanel.setLocation(350, 200);
 		specificInfoPanel.setSize(440, 325);
 		add(specificInfoPanel);
+		
+		// Save Button
+		saveButton = new JButton("Save");
+		saveButton.setFont(new Font(enter.getFont().getName(), Font.PLAIN, 16));
+		saveButton.setLocation(675, 550);
+		saveButton.setSize(100, 30);
+		saveButton.addActionListener(new ActionListener(){@Override
+			public void actionPerformed(ActionEvent e) {
+				if(allFieldsReady())
+					saveAnimalFromGUI();
+			}
+		});
+		add(saveButton);
 	}
 	
 	public void prep(){
@@ -110,6 +125,14 @@ public class HomePanel extends JPanel {
 			result[i] = array[i-1];
 		
 		return result;
+	}
+	
+	private boolean allFieldsReady(){
+		return basicInfoPanel.allFieldsReady();
+	}
+	
+	private void saveAnimalFromGUI(){
+		
 	}
 
 }
