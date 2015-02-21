@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.grantbroadwater.AnimalRecordsSystem;
 import com.grantbroadwater.animal.Animal;
 import com.grantbroadwater.animal.AnimalType;
 
@@ -28,8 +29,13 @@ public class BasicInfoPanel extends JPanel {
 	private JTextField doaTextField;
 	private JTextField partyTextField;
 	private JTextField cageTextField;
-	private JComboBox<Boolean> chippedComboBox;
 	// TODO: Chip
+	private JComboBox<Boolean> chippedComboBox;
+	private JTextField chipNumberTextField;
+	private JLabel lblDate;
+	private JTextField dateTextField;
+	private JLabel lblOwner;
+	private JTextField ownerTextField;
 	
 	public BasicInfoPanel(){
 		super();
@@ -96,7 +102,7 @@ public class BasicInfoPanel extends JPanel {
 		add(lblDOB);
 						
 		// DOB Text Field
-		dobTextField = new JTextField("MM/DD/YYYY");
+		dobTextField = new JTextField("mm/dd/yyyy");
 		dobTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
 		dobTextField.setLocation(10, 190);
 		dobTextField.setSize(150, 20);
@@ -111,7 +117,7 @@ public class BasicInfoPanel extends JPanel {
 		add(lblDOA);
 								
 		// DOA Text Field
-		doaTextField = new JTextField("MM/DD/YYYY");
+		doaTextField = new JTextField("mm/dd/yyyy");
 		doaTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
 		doaTextField.setLocation(10, 235);
 		doaTextField.setSize(150, 20);
@@ -161,10 +167,64 @@ public class BasicInfoPanel extends JPanel {
 		chippedComboBox.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				if(chippedComboBox.getSelectedItem().equals(true)){
+					lblDate.setText("Contact Date:");
+					dateTextField.setText("mm/dd/yyyy");
+					lblOwner.setVisible(true);
+					ownerTextField.setVisible(true);
+					ownerTextField.setText("");
+				}else if(chippedComboBox.getSelectedItem().equals(false)){
+					lblDate.setText("Implant Date:");
+					dateTextField.setText("mm/dd/yyyy");
+					lblOwner.setVisible(false);
+					ownerTextField.setVisible(false);
+				}
+				AnimalRecordsSystem.getFrame().updateGraphics();
 			}
 		});
 		add(chippedComboBox);
+		
+		// Chip Number label
+		JLabel lblChipNumber = new JLabel("Chip Number:");
+		lblChipNumber.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
+		lblChipNumber.setLocation(170, 170);
+		lblChipNumber.setSize(150, 20);
+		add(lblChipNumber);
+		
+		// Chip Number Text Field
+		chipNumberTextField = new JTextField();
+		chipNumberTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
+		chipNumberTextField.setLocation(170, 190);
+		chipNumberTextField.setSize(150, 20);
+		add(chipNumberTextField);
+		
+		// Date Label
+		lblDate = new JLabel("Contact Date:");
+		lblDate.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
+		lblDate.setLocation(170, 215);
+		lblDate.setSize(150, 20);
+		add(lblDate);
+		
+		// Date Text Field
+		dateTextField = new JTextField("mm/dd/yyyy");
+		dateTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
+		dateTextField.setLocation(170, 235);
+		dateTextField.setSize(150, 20);
+		add(dateTextField);
+		
+		// Owner Label
+		lblOwner = new JLabel("Owner:");
+		lblOwner.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
+		lblOwner.setLocation(170, 260);
+		lblOwner.setSize(150, 20);
+		add(lblOwner);
+		
+		// Owner Text Field
+		ownerTextField = new JTextField();
+		ownerTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
+		ownerTextField.setLocation(170, 280);
+		ownerTextField.setSize(150, 20);
+		add(ownerTextField);
 	}
 	
 	public AnimalType getType(){
