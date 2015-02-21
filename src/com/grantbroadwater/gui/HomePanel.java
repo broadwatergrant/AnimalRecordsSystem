@@ -23,6 +23,7 @@ public class HomePanel extends JPanel {
 
 	private JComboBox<String> animalComboBox;
 	private BasicInfoPanel basicInfoPanel;
+	private SpecificInfoPanel specificInfoPanel;
 	
 	public HomePanel() {
 		super(null);
@@ -57,6 +58,12 @@ public class HomePanel extends JPanel {
 		basicInfoPanel.setLocation(10, 200);
 		basicInfoPanel.setSize(325, 350);
 		add(basicInfoPanel);
+		
+		// Specific Info Panel
+		specificInfoPanel = new DogInfoPanel();
+		specificInfoPanel.setLocation(350, 200);
+		specificInfoPanel.setSize(440, 350);
+		add(specificInfoPanel);
 	}
 	
 	public void prep(){
@@ -88,6 +95,11 @@ public class HomePanel extends JPanel {
 	
 	private void actionPerformedOnComboBox(){
 		// TODO: Event Handler
+	}
+	
+	protected void setSpecificInfoPanel(SpecificInfoPanel panel){
+		this.specificInfoPanel = panel;
+		AnimalRecordsSystem.getFrame().updateGraphics();
 	}
 	
 	private String[] prependArray(String[] array, String message){

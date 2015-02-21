@@ -12,7 +12,7 @@ public abstract class Animal {
 	private String relinquishingParty;
 	private int cageNumber;
 	private String caseNumber;
-	private boolean quarentined;
+	private boolean quarantined;
 	private boolean current;
 	
 	public Animal() {
@@ -106,7 +106,7 @@ public abstract class Animal {
 	}
 	
 	public String generateCaseNumber(){
-		String pre = new String(isQuarentined() ? "Q" : "");
+		String pre = new String(isQuarantined() ? "Q" : "");
 		String type;
 		switch(this.type){
 		case DOG:
@@ -128,12 +128,12 @@ public abstract class Animal {
 		return setCaseNumber(pre+type+hashCode());
 	}
 	
-	public boolean isQuarentined() {
-		return quarentined;
+	public boolean isQuarantined() {
+		return quarantined;
 	}
 
-	public void setQuarentined(boolean quarentined) {
-		this.quarentined = quarentined;
+	public void setQuarantined(boolean quarantined) {
+		this.quarantined = quarantined;
 	}
 
 	public boolean isCurrent() {

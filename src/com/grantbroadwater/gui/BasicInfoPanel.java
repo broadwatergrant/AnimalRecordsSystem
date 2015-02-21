@@ -297,8 +297,8 @@ public class BasicInfoPanel extends JPanel {
 		}
 	}
 	
-	public void setCageNumber(String cageNumber){
-		this.cageTextField.setText(cageNumber);
+	public void setCageNumber(int cageNumber){
+		this.cageTextField.setText(""+cageNumber);
 		
 	}
 
