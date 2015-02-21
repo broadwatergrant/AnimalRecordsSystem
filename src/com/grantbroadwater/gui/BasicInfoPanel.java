@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
@@ -29,7 +30,6 @@ public class BasicInfoPanel extends JPanel {
 	private JTextField doaTextField;
 	private JTextField partyTextField;
 	private JTextField cageTextField;
-	// TODO: Chip
 	private JComboBox<Boolean> chippedComboBox;
 	private JTextField chipNumberTextField;
 	private JLabel lblDate;
@@ -231,8 +231,16 @@ public class BasicInfoPanel extends JPanel {
 		return (AnimalType) typeComboBox.getSelectedItem();
 	}
 	
+	public void setType(AnimalType type){
+		typeComboBox.setSelectedItem(type);
+	}
+	
 	public String getName(){
 		return nameTextField.getText();
+	}
+	
+	public void setName(String name){
+		nameTextField.setText(name);
 	}
 	
 	public int getAge(){
@@ -243,12 +251,21 @@ public class BasicInfoPanel extends JPanel {
 		}
 	}
 	
+	public void setAge(int age){
+		ageTextField.setText(""+age);
+	}
+	
 	public java.util.Date getDateOfBirth(){
 		try {
 			return Animal.parseDate(dobTextField.getText());
 		} catch (Exception e) {
 			return null;
 		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void setDateOfBirth(Date date){
+		dobTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
 	}
 	
 	public java.util.Date getDateOfArrival(){
@@ -259,8 +276,17 @@ public class BasicInfoPanel extends JPanel {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
+	public void setDateOfArrival(Date date){
+		dobTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+	}
+	
 	public String getRelinquishingParty(){
 		return this.partyTextField.getText();
+	}
+	
+	public void setRelinquishingParty(String party){
+		this.partyTextField.setText(party);
 	}
 	
 	public int getCageNumber(){
@@ -269,6 +295,11 @@ public class BasicInfoPanel extends JPanel {
 		} catch (Exception e) {
 			return -1;
 		}
+	}
+	
+	public void setCageNumber(String cageNumber){
+		this.cageTextField.setText(cageNumber);
+		
 	}
 
 }
