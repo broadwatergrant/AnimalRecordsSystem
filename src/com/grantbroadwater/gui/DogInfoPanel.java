@@ -4,14 +4,18 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.grantbroadwater.animal.Animal;
+import com.grantbroadwater.animal.DogBreed;
 import com.grantbroadwater.animal.HairType;
 import com.grantbroadwater.animal.Sex;
+import com.grantbroadwater.animal.WeightRange;
 
 public class DogInfoPanel extends SpecificInfoPanel {
 
@@ -314,5 +318,132 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		add(spayedNeuteredTextField);
 	}
 	
+	public DogBreed getBreed(){
+		return new DogBreed(breedNameTextField.getText(),
+				new WeightRange(Double.parseDouble(wrLowTextField.getText()), Double.parseDouble(wrHighTextField.getText())),
+				hairColorTextField.getText(),
+				(HairType)hairTypeComboBox.getSelectedItem());
+	}
+	
+	public void setBreed(DogBreed breed){
+		breedNameTextField.setText(breed.getName());
+		wrLowTextField.setText(""+breed.getWeight().getLow());
+		wrHighTextField.setText(""+breed.getWeight().getHigh());
+		hairColorTextField.setText(breed.getHairColor());
+		hairTypeComboBox.setSelectedItem(breed.getHairType());
+	}
+	
+	public boolean getFleaTested(){
+		return (boolean)fleaComboBox.getSelectedItem();
+	}
 
+	public void setFleaTested(boolean value){
+		fleaComboBox.setSelectedItem(value);
+	}
+	
+	public Date getFleaTestDate(){
+		return Animal.parseDate(fleaTestTextField.getText());
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void setFleaTestDate(Date date){
+		fleaTestTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+	}
+	
+	public boolean getHeartwormTested(){
+		return heartwormComboBox.getSelectedItem().equals("Positive") ? true : false;
+	}
+	
+	public void setHeartwormTested(boolean value){
+		if(value)
+			heartwormComboBox.setSelectedItem("Positive");
+		else
+			heartwormComboBox.setSelectedItem("Negative");
+	}
+	
+	public Date getFirstHeartwormTreatment(){
+		return Animal.parseDate(firstHeartwormTextField.getText());
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void setFirstHeartwormTreatment(Date date){
+		firstHeartwormTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+	}
+	
+	public Date getResetHeartwormTreatment(){
+		return Animal.parseDate(resetHeartwormTextField.getText());
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void setResetHeartwormTreatment(Date date){
+		resetHeartwormTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+	}
+	
+	public boolean getRabiesVaccinated(){
+		return rabiesCheckBox.isSelected();
+	}
+	
+	public void setRabiesVaccinated(boolean value){
+		rabiesCheckBox.setSelected(value);
+	}
+	
+	public Date getRabiesDate(){
+		return Animal.parseDate(rabiesTextField.getText());
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void setRabiesDate(Date date){
+		rabiesTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+	}
+	
+	public boolean getDistemperVaccinated(){
+		return distemperCheckBox.isSelected();
+	}
+	
+	public void setDistemperVaccinated(boolean value){
+		distemperCheckBox.setSelected(value);
+	}
+	
+	public Date getDistemperDate(){
+		return Animal.parseDate(distemperTextField.getText());
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void setDistemperDate(Date date){
+		distemperTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+	}
+	
+	public boolean getBordetellaVaccinated(){
+		return bordetellaCheckBox.isSelected();
+	}
+	
+	public void setBordetellaVaccinated(boolean value){
+		bordetellaCheckBox.setSelected(value);
+	}
+	
+	public Date getBordetellaDate(){
+		return Animal.parseDate(bordetellaTextField.getText());
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void setBordetellaDate(Date date){
+		bordetellaTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+	}
+	
+	public boolean getSpayedNeutered(){
+		return (boolean)spayedNeuteredComboBox.getSelectedItem();
+	}
+	
+	public void setSpayedNeutered(boolean value){
+		spayedNeuteredComboBox.setSelectedItem(value);
+	}
+	
+	public Date getSpayedNeuteredDate(){
+		return Animal.parseDate(spayedNeuteredTextField.getText());
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void setSpayedNeuteredDate(Date date){
+		bordetellaTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+	}
 }
