@@ -198,6 +198,13 @@ public class Animals {
 		return a;
 	}
 
+	public Animal getAnimalWithCaseNumber(String caseNumber){
+		for(Animal a : getAll())
+			if(a.getCaseNumber().equals(caseNumber))
+				return a;
+		return null;
+	}
+	
 	public ArrayList<Animal> getCurrent() {
 		return current;
 	}

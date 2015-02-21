@@ -12,10 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.grantbroadwater.AnimalRecordsSystem;
+import com.grantbroadwater.animal.Animal;
 import com.grantbroadwater.animal.AnimalType;
 import com.grantbroadwater.animal.Animals;
 import com.grantbroadwater.animal.Chip;
 import com.grantbroadwater.animal.Dog;
+import com.grantbroadwater.util.Log;
 
 public class HomePanel extends JPanel {
 
@@ -30,6 +32,10 @@ public class HomePanel extends JPanel {
 	private BasicInfoPanel basicInfoPanel;
 	private SpecificInfoPanel specificInfoPanel;
 	private JButton saveButton;
+	
+	@SuppressWarnings("unused")
+	private boolean toOverwriteAnimal;
+	private Animal animalToOverwrite;
 	
 	public HomePanel() {
 		super(null);
@@ -53,11 +59,13 @@ public class HomePanel extends JPanel {
 		enter.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO: Enter event handler
+				actionPerformedOnComboBox();
 			}
 		});
 		add(enter);
 		
+		toOverwriteAnimal = false;
+		animalToOverwrite = null;
 		
 		// Basic Info Panel
 		basicInfoPanel = new BasicInfoPanel();
@@ -113,7 +121,18 @@ public class HomePanel extends JPanel {
 	}
 	
 	private void actionPerformedOnComboBox(){
-		// TODO: Event Handler
+		if(animalComboBox.getSelectedItem().equals(newPrompt)){
+			toOverwriteAnimal = false;
+			animalToOverwrite = null;
+			clearAllFields();
+		}else{
+			toOverwriteAnimal = true;
+			animalToOverwrite = AnimalRecordsSystem.getAnimals().getAnimalWithCaseNumber((String)animalComboBox.getSelectedItem());
+			if(animalToOverwrite != null)
+				setAllFields();
+			else
+				clearAllFields();
+		}
 	}
 	
 	protected void setSpecificInfoPanel(SpecificInfoPanel panel){
@@ -129,6 +148,16 @@ public class HomePanel extends JPanel {
 			result[i] = array[i-1];
 		
 		return result;
+	}
+	
+	private void clearAllFields(){
+		// TODO: Clear all fields
+		new Log("Clear Fields");
+	}
+	
+	private void setAllFields(){
+		// TODO: Set all fields
+		new Log("Fill fields with "+animalToOverwrite.getName()+"'s properties");
 	}
 	
 	private boolean allFieldsReady(){

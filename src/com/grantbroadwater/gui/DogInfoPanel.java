@@ -328,6 +328,7 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		spayedNeuteredTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
 		spayedNeuteredTextField.setLocation(280, 245);
 		spayedNeuteredTextField.setSize(w, 20);
+		spayedNeuteredTextField.setEnabled(false);
 		add(spayedNeuteredTextField);
 	}
 	
