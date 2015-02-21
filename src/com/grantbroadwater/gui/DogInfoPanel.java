@@ -26,7 +26,7 @@ public class DogInfoPanel extends SpecificInfoPanel {
 	private JComboBox<Sex> sexComboBox;
 	private JComboBox<Boolean> fleaComboBox;
 	private JTextField fleaTestTextField;
-	private JComboBox<Boolean> heartwormComboBox;
+	private JComboBox<String> heartwormComboBox;
 	private JTextField firstHeartwormTextField;
 	private JTextField resetHeartwormTextField;
 	private JComboBox<Boolean> rabiesComboBox;
@@ -135,7 +135,7 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		// Flea Tested Label
 		JLabel lblFleaTest = new JLabel("Flea Tested:");
 		lblFleaTest.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
-		lblFleaTest.setLocation(10, 270);
+		lblFleaTest.setLocation(145, 65);
 		lblFleaTest.setSize(w, 20);
 		add(lblFleaTest);
 		
@@ -143,7 +143,7 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		Boolean[] bValues = {true, false};
 		fleaComboBox = new JComboBox<Boolean>(bValues);
 		fleaComboBox.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
-		fleaComboBox.setLocation(10, 290);
+		fleaComboBox.setLocation(145, 85);
 		fleaComboBox.setSize(w, 20);
 		fleaComboBox.addActionListener(new ActionListener(){
 			@Override
@@ -157,16 +157,75 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		// Flea Date Label
 		JLabel lblFleaDate = new JLabel("First Treatment:");
 		lblFleaDate.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
-		lblFleaDate.setLocation(10, 315);
+		lblFleaDate.setLocation(145, 105);
 		lblFleaDate.setSize(w, 20);
 		add(lblFleaDate);
 		
 		// Flea Date Text Field
 		fleaTestTextField = new JTextField("mm/dd/yyyy");
 		fleaTestTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
-		fleaTestTextField.setLocation(10, 335);
+		fleaTestTextField.setLocation(145, 125);
 		fleaTestTextField.setSize(w, 20);
 		add(fleaTestTextField);
+		
+		// HeartWorm Label
+		JLabel lblHartworm = new JLabel("Heartworm Results:");
+		lblHartworm.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
+		lblHartworm.setLocation(145, 145);
+		lblHartworm.setSize(w, 20);
+		add(lblHartworm);
+		
+		// Heart worm Combo Box
+		String[] hwValues = {"Positive", "Negative"};
+		heartwormComboBox = new JComboBox<String>(hwValues);
+		heartwormComboBox.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
+		heartwormComboBox.setLocation(145, 165);
+		heartwormComboBox.setSize(w, 20);
+		heartwormComboBox.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(heartwormComboBox.getSelectedItem().equals("Positive")){
+					firstHeartwormTextField.setEnabled(true);
+					firstHeartwormTextField.setText("mm/dd/yyyy");
+					resetHeartwormTextField.setEnabled(true);
+					resetHeartwormTextField.setText("mm/dd/yyyy");
+				}else if(heartwormComboBox.getSelectedItem().equals("Negative")){
+					firstHeartwormTextField.setEnabled(false);
+					firstHeartwormTextField.setText("mm/dd/yyyy");
+					resetHeartwormTextField.setEnabled(false);
+					resetHeartwormTextField.setText("mm/dd/yyyy");
+				}
+			}
+		});
+		add(heartwormComboBox);
+		
+		// Treatment Begins Label
+		JLabel lblHartwormBegins = new JLabel("Begin Treatement:");
+		lblHartwormBegins.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
+		lblHartwormBegins.setLocation(145, 185);
+		lblHartwormBegins.setSize(w, 20);
+		add(lblHartwormBegins);
+		
+		// Treatment Begins Text Field
+		firstHeartwormTextField = new JTextField("mm/dd/yyyy");
+		firstHeartwormTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
+		firstHeartwormTextField.setLocation(145, 205);
+		firstHeartwormTextField.setSize(w, 20);
+		add(firstHeartwormTextField);
+		
+		// Treatment Reset Label
+		JLabel lblReset = new JLabel("Reset Date:");
+		lblReset.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
+		lblReset.setLocation(145, 225);
+		lblReset.setSize(w, 20);
+		add(lblReset);
+		
+		// Treatment Reset Text Field
+		resetHeartwormTextField = new JTextField("mm/dd/yyyy");
+		resetHeartwormTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
+		resetHeartwormTextField.setLocation(145, 245);
+		resetHeartwormTextField.setSize(w, 20);
+		add(resetHeartwormTextField);
 	}
 	
 

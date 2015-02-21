@@ -62,7 +62,7 @@ public class HomePanel extends JPanel {
 		// Specific Info Panel
 		specificInfoPanel = new DogInfoPanel();
 		specificInfoPanel.setLocation(350, 200);
-		specificInfoPanel.setSize(440, 375);
+		specificInfoPanel.setSize(440, 325);
 		add(specificInfoPanel);
 	}
 	
