@@ -1,9 +1,11 @@
 package com.grantbroadwater.gui;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -29,9 +31,12 @@ public class DogInfoPanel extends SpecificInfoPanel {
 	private JComboBox<String> heartwormComboBox;
 	private JTextField firstHeartwormTextField;
 	private JTextField resetHeartwormTextField;
-	private JComboBox<Boolean> rabiesComboBox;
-	private JComboBox<Boolean> distemperComboBox;
-	private JComboBox<Boolean> bordetellaComboBox;
+	private JCheckBox rabiesCheckBox;
+	private JTextField rabiesTextField;
+	private JCheckBox distemperCheckBox;
+	private JTextField distemperTextField;
+	private JCheckBox bordetellaCheckBox;
+	private JTextField bordetellaTextField;
 	private JComboBox<Boolean> spayedNeuteredComboBox;
 	private JTextField spayedNeuteredTextField;
 	
@@ -226,6 +231,87 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		resetHeartwormTextField.setLocation(145, 245);
 		resetHeartwormTextField.setSize(w, 20);
 		add(resetHeartwormTextField);
+		
+		// Rabies Check Box
+		rabiesCheckBox = new JCheckBox("Rabies Vaccinated:");
+		rabiesCheckBox.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
+		rabiesCheckBox.setLocation(280, 65);
+		rabiesCheckBox.setSize(w+5, 20);
+		rabiesCheckBox.setBackground(Color.WHITE);
+		add(rabiesCheckBox);
+		
+		// Rabies Text Field
+		rabiesTextField = new JTextField("mm/dd/yyyy");
+		rabiesTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
+		rabiesTextField.setLocation(280, 85);
+		rabiesTextField.setSize(w, 20);
+		add(rabiesTextField);
+		
+		// Distemper Check Box
+		distemperCheckBox= new JCheckBox("Distemper Vac:");
+		distemperCheckBox.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
+		distemperCheckBox.setLocation(280, 105);
+		distemperCheckBox.setSize(w, 20);
+		distemperCheckBox.setBackground(Color.WHITE);
+		add(distemperCheckBox);
+		
+		// Distemper Text Field
+		distemperTextField = new JTextField("mm/dd/yyyy");
+		distemperTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
+		distemperTextField.setLocation(280, 125);
+		distemperTextField.setSize(w, 20);
+		add(distemperTextField);
+		
+		// Bordetella Check Box
+		bordetellaCheckBox= new JCheckBox("Bordetella Vac:");
+		bordetellaCheckBox.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
+		bordetellaCheckBox.setLocation(280, 145);
+		bordetellaCheckBox.setSize(w, 20);
+		bordetellaCheckBox.setBackground(Color.WHITE);
+		add(bordetellaCheckBox);
+		
+		// Bordetella Text Field
+		bordetellaTextField = new JTextField("mm/dd/yyyy");
+		bordetellaTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
+		bordetellaTextField.setLocation(280, 165);
+		bordetellaTextField.setSize(w, 20);
+		add(bordetellaTextField);
+		
+
+		// Spayed / Neutered Label
+		JLabel lblSpayedNeutered = new JLabel("Spayed / Neutered:");
+		lblSpayedNeutered.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
+		lblSpayedNeutered.setLocation(280, 185);
+		lblSpayedNeutered.setSize(w, 20);
+		add(lblSpayedNeutered);
+		
+		// Spayed / Neutered Combo Box
+		spayedNeuteredComboBox = new JComboBox<Boolean>(bValues);
+		spayedNeuteredComboBox.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
+		spayedNeuteredComboBox.setLocation(280, 205);
+		spayedNeuteredComboBox.setSize(w, 20);
+		spayedNeuteredComboBox.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				spayedNeuteredTextField.setEnabled((Boolean)spayedNeuteredComboBox.getSelectedItem());
+				spayedNeuteredTextField.setText("mm/dd/yyyy");
+			}
+		});
+		add(spayedNeuteredComboBox);
+		
+		// Spayed / Neutered Date Label
+		JLabel lblSNDate = new JLabel("Procedure Date:");
+		lblSNDate.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
+		lblSNDate.setLocation(280, 225);
+		lblSNDate.setSize(w, 20);
+		add(lblSNDate);
+		
+		// Spayed / Neutered Date Text Field
+		spayedNeuteredTextField = new JTextField("mm/dd/yyyy");
+		spayedNeuteredTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
+		spayedNeuteredTextField.setLocation(280, 245);
+		spayedNeuteredTextField.setSize(w, 20);
+		add(spayedNeuteredTextField);
 	}
 	
 
