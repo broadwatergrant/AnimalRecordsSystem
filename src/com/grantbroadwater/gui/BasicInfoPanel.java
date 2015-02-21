@@ -1,6 +1,7 @@
 package com.grantbroadwater.gui;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,7 @@ import java.sql.Date;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -75,6 +77,7 @@ public class BasicInfoPanel extends JPanel {
 		
 		// Name Text Field
 		nameTextField = new JTextField();
+		nameTextField.setName("Name");
 		nameTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
 		nameTextField.setLocation(10, 105);
 		nameTextField.setSize(150, 20);
@@ -89,6 +92,7 @@ public class BasicInfoPanel extends JPanel {
 				
 		// Age Text Field
 		ageTextField = new JTextField();
+		ageTextField.setName("Age");
 		ageTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
 		ageTextField.setLocation(10, 145);
 		ageTextField.setSize(150, 20);
@@ -103,6 +107,7 @@ public class BasicInfoPanel extends JPanel {
 						
 		// DOB Text Field
 		dobTextField = new JTextField("mm/dd/yyyy");
+		dobTextField.setName("Date of Birth");
 		dobTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
 		dobTextField.setLocation(10, 190);
 		dobTextField.setSize(150, 20);
@@ -118,6 +123,7 @@ public class BasicInfoPanel extends JPanel {
 								
 		// DOA Text Field
 		doaTextField = new JTextField("mm/dd/yyyy");
+		doaTextField.setName("Date of Arrival");
 		doaTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
 		doaTextField.setLocation(10, 235);
 		doaTextField.setSize(150, 20);
@@ -132,6 +138,7 @@ public class BasicInfoPanel extends JPanel {
 						
 		// Relinquishing Party Text Field
 		partyTextField = new JTextField();
+		partyTextField.setName("Relinquishing Party");
 		partyTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
 		partyTextField.setLocation(10, 280);
 		partyTextField.setSize(150, 20);
@@ -146,6 +153,7 @@ public class BasicInfoPanel extends JPanel {
 								
 		// Cage Number Text Field
 		cageTextField = new JTextField();
+		cageTextField.setName("Cage Number");
 		cageTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
 		cageTextField.setLocation(170, 105);
 		cageTextField.setSize(150, 20);
@@ -193,6 +201,7 @@ public class BasicInfoPanel extends JPanel {
 		
 		// Chip Number Text Field
 		chipNumberTextField = new JTextField();
+		chipNumberTextField.setName("Chip Number");
 		chipNumberTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
 		chipNumberTextField.setLocation(170, 190);
 		chipNumberTextField.setSize(150, 20);
@@ -207,6 +216,7 @@ public class BasicInfoPanel extends JPanel {
 		
 		// Date Text Field
 		dateTextField = new JTextField("mm/dd/yyyy");
+		dateTextField.setName("Chip Date");
 		dateTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
 		dateTextField.setLocation(170, 235);
 		dateTextField.setSize(150, 20);
@@ -221,6 +231,7 @@ public class BasicInfoPanel extends JPanel {
 		
 		// Owner Text Field
 		ownerTextField = new JTextField();
+		ownerTextField.setName("Owner");
 		ownerTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
 		ownerTextField.setLocation(170, 280);
 		ownerTextField.setSize(150, 20);
@@ -300,6 +311,69 @@ public class BasicInfoPanel extends JPanel {
 	public void setCageNumber(int cageNumber){
 		this.cageTextField.setText(""+cageNumber);
 		
+	}
+	
+	public boolean allFieldsReady(){
+		// Name Text Field
+		if(nameTextField.getText().equals(""))
+			return showErrorDialog(nameTextField);
+		
+		// Age Text Field
+		try {
+			Integer.parseInt(ageTextField.getText());
+		} catch (Exception e) {
+			return showErrorDialog(ageTextField);
+		}
+		
+		// DOB Text Field
+		try {
+			Animal.parseDate(dobTextField.getText());
+		} catch (Exception e) {
+			return showErrorDialog(dobTextField);
+		}
+		
+		// DOA Text Field
+		try {
+			Animal.parseDate(doaTextField.getText());
+		} catch (Exception e) {
+			return showErrorDialog(doaTextField);
+		}
+		
+		// Relinquishing Party Text Field
+		if(partyTextField.getText().equals(""))
+			return showErrorDialog(partyTextField);
+		
+		// Cage Text Field
+		try {
+			Integer.parseInt(cageTextField.getText());
+		} catch (Exception e) {
+			return showErrorDialog(cageTextField);
+		}
+		
+		// Chip Number
+		try {
+			Integer.parseInt(chipNumberTextField.getText());
+		} catch (Exception e) {
+			return showErrorDialog(chipNumberTextField);
+		}
+		
+		// Chip Date
+		try {
+			Animal.parseDate(dateTextField.getText());
+		} catch (Exception e) {
+			return showErrorDialog(dateTextField);
+		}
+		
+		// Owner
+		if(chippedComboBox.getSelectedItem().equals(true) && ownerTextField.getText().equals(""))
+			return showErrorDialog(ownerTextField);
+		
+		return true;
+	}
+	
+	private boolean showErrorDialog(Component comp){
+		JOptionPane.showMessageDialog(null, comp.getName()+" is not correctly filled");
+		return false;
 	}
 
 }

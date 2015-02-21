@@ -1,10 +1,7 @@
 package com.grantbroadwater.gui;
 
 import java.awt.Color;
-import java.awt.Component;
-
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public abstract class SpecificInfoPanel extends JPanel {

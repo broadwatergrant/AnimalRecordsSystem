@@ -1,14 +1,17 @@
 package com.grantbroadwater.gui;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.jar.Attributes.Name;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.grantbroadwater.animal.Animal;
@@ -64,6 +67,7 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		
 		// Breed Name Text Field
 		breedNameTextField = new JTextField();
+		breedNameTextField.setName("Breed");
 		breedNameTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
 		breedNameTextField.setLocation(10, 85);
 		breedNameTextField.setSize(w, 20);
@@ -78,6 +82,7 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		
 		// Weight Range Low Text Field
 		wrLowTextField = new JTextField();
+		wrLowTextField.setName("Weight Range (Low)");
 		wrLowTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
 		wrLowTextField.setLocation(10, 125);
 		wrLowTextField.setSize(57, 20);
@@ -92,6 +97,7 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		
 		// Weight Range High Text Field
 		wrHighTextField = new JTextField();
+		wrHighTextField.setName("Weight Range (High)");
 		wrHighTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
 		wrHighTextField.setLocation(77, 125);
 		wrHighTextField.setSize(57, 20);
@@ -121,6 +127,7 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		
 		// Hair Color Text Field
 		hairColorTextField = new JTextField();
+		hairColorTextField.setName("Hair Color");
 		hairColorTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
 		hairColorTextField.setLocation(10, 205);
 		hairColorTextField.setSize(w, 20);
@@ -172,6 +179,7 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		
 		// Flea Date Text Field
 		fleaTestTextField = new JTextField("mm/dd/yyyy");
+		fleaTestTextField.setName("Flea Test Date");
 		fleaTestTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
 		fleaTestTextField.setLocation(145, 125);
 		fleaTestTextField.setSize(w, 20);
@@ -217,6 +225,7 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		
 		// Treatment Begins Text Field
 		firstHeartwormTextField = new JTextField("mm/dd/yyyy");
+		firstHeartwormTextField.setName("Heart Worm Starting Date");
 		firstHeartwormTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
 		firstHeartwormTextField.setLocation(145, 205);
 		firstHeartwormTextField.setSize(w, 20);
@@ -231,6 +240,7 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		
 		// Treatment Reset Text Field
 		resetHeartwormTextField = new JTextField("mm/dd/yyyy");
+		resetHeartwormTextField.setName("Heart Worm Reset Date");
 		resetHeartwormTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
 		resetHeartwormTextField.setLocation(145, 245);
 		resetHeartwormTextField.setSize(w, 20);
@@ -246,6 +256,7 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		
 		// Rabies Text Field
 		rabiesTextField = new JTextField("mm/dd/yyyy");
+		rabiesTextField.setName("Rabies Date");
 		rabiesTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
 		rabiesTextField.setLocation(280, 85);
 		rabiesTextField.setSize(w, 20);
@@ -261,6 +272,7 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		
 		// Distemper Text Field
 		distemperTextField = new JTextField("mm/dd/yyyy");
+		distemperTextField.setName("Distemper Date");
 		distemperTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
 		distemperTextField.setLocation(280, 125);
 		distemperTextField.setSize(w, 20);
@@ -276,6 +288,7 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		
 		// Bordetella Text Field
 		bordetellaTextField = new JTextField("mm/dd/yyyy");
+		bordetellaTextField.setName("Bordetella Date");
 		bordetellaTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
 		bordetellaTextField.setLocation(280, 165);
 		bordetellaTextField.setSize(w, 20);
@@ -312,6 +325,7 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		
 		// Spayed / Neutered Date Text Field
 		spayedNeuteredTextField = new JTextField("mm/dd/yyyy");
+		spayedNeuteredTextField.setName("Spayed / Neutered Date");
 		spayedNeuteredTextField.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
 		spayedNeuteredTextField.setLocation(280, 245);
 		spayedNeuteredTextField.setSize(w, 20);
@@ -445,5 +459,87 @@ public class DogInfoPanel extends SpecificInfoPanel {
 	@SuppressWarnings("deprecation")
 	public void setSpayedNeuteredDate(Date date){
 		bordetellaTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+	}
+
+	@Override
+	public boolean allFieldsReady() {
+		
+		// Breed Name Text Field
+		if(breedNameTextField.getText().equals(""))
+			return showErrorDialog(breedNameTextField);
+		
+		// Weight Range Low Text Field
+		try {
+			Double.parseDouble(wrLowTextField.getText());
+		} catch (Exception e) {
+			return showErrorDialog(wrLowTextField);
+		}
+		
+		// Weight Range High Text Field
+		try {
+			Double.parseDouble(wrHighTextField.getText());
+		} catch (Exception e) {
+			return showErrorDialog(wrHighTextField);
+		}
+		
+		// Hair Color Text Field
+		if(hairColorTextField.getText().equals(""))
+			return showErrorDialog(hairColorTextField);
+		
+		// Flea Test Date
+		try {
+			Animal.parseDate(fleaTestTextField.getText());
+		} catch (Exception e) {
+			return showErrorDialog(fleaTestTextField);
+		}
+		
+		// First Heartworm Text Field
+		try {
+			Animal.parseDate(firstHeartwormTextField.getText());
+		} catch (Exception e) {
+			return showErrorDialog(firstHeartwormTextField);
+		}
+		
+		// Reset Heartworm Text Field
+		try {
+			Animal.parseDate(resetHeartwormTextField.getText());
+		} catch (Exception e) {
+			return showErrorDialog(resetHeartwormTextField);
+		}
+		
+		// Rabies Date Text Field
+		try {
+			Animal.parseDate(rabiesTextField.getText());
+		} catch (Exception e) {
+			return showErrorDialog(rabiesTextField);
+		}
+		
+		// Distemper Date Text Field
+		try {
+			Animal.parseDate(distemperTextField.getText());
+		} catch (Exception e) {
+			return showErrorDialog(distemperTextField);
+		}
+		
+		// Bordetella Date Text Field
+		try {
+			Animal.parseDate(bordetellaTextField.getText());
+		} catch (Exception e) {
+			return showErrorDialog(bordetellaTextField);
+		}
+		
+		// Spayed / Neutered Text Field
+		try {
+			Animal.parseDate(spayedNeuteredTextField.getText());
+		} catch (Exception e) {
+			return showErrorDialog(spayedNeuteredTextField);
+		}
+		
+		return true;
+	}
+	
+	private boolean showErrorDialog(Component comp){
+		JOptionPane.showMessageDialog(null, comp.getName()+" is not correctly filled");
+		return false;
 	}
 }
