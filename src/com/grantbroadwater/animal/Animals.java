@@ -71,7 +71,6 @@ public class Animals {
 			scan.close();
 			new Log(getAll().size()+" animals loaded.");
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
@@ -81,13 +80,14 @@ public class Animals {
 			PrintWriter writer = new PrintWriter(animalFile, "UTF-8");
 			
 			for(Animal a : getAll()){
-				writer.print(a.getStringRepresentation());
+				// TODO: Confirm correctiveness
+				writer.println(a.getStringRepresentation());
 			}
 			
 			writer.close();
 			new Log(getAll().size()+" animals saved.");
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 	
