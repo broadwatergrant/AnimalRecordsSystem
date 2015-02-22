@@ -24,7 +24,6 @@ public abstract class Animal {
 		setChip(new Chip());
 		setRelinquishingParty("");
 		setCageNumber(0);
-		generateCaseNumber();
 		setCurrent(true);			
 	}
 	
@@ -37,7 +36,6 @@ public abstract class Animal {
 		setChip(chip);
 		setRelinquishingParty(relinquishingParty);
 		setCageNumber(cageNumber);
-		generateCaseNumber();
 		setCurrent(true);
 	}
 	

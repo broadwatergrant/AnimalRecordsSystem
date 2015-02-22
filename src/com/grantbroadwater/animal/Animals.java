@@ -39,11 +39,13 @@ public class Animals {
 		for(int i=0; i<current.size(); i++){
 			if(current.get(i).equals(a)){
 				current.set(i, b);
+				return;
 			}
 		}
 		for(int i=0; i<past.size(); i++){
 			if(past.get(i).equals(a)){
 				past.set(i, b);
+				return;
 			}
 		}
 		throw new IllegalArgumentException("No referance to "+a.getName());
@@ -64,7 +66,6 @@ public class Animals {
 			while(scan.hasNext()){
 				String s = scan.next();
 				Animal a = parseAnimal(s);
-				a.generateCaseNumber();
 				addToAppropriateList(a);
 			}
 			scan.close();
@@ -255,7 +256,7 @@ public class Animals {
 		ArrayList<Animal> newCurrent = new ArrayList<Animal>();
 		
 		for(Animal a : current)
-			if(a != adoptedAnimal)
+			if(!a.getCaseNumber().equals(adoptedAnimal.getCaseNumber()))
 				newCurrent.add(a);
 		
 		setCurrent(newCurrent);

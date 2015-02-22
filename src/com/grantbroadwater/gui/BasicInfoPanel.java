@@ -274,9 +274,8 @@ public class BasicInfoPanel extends JPanel {
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void setDateOfBirth(Date date){
-		dobTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+		dobTextField.setText(Animal.printDate(date));
 	}
 	
 	public java.util.Date getDateOfArrival(){
@@ -287,9 +286,8 @@ public class BasicInfoPanel extends JPanel {
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void setDateOfArrival(Date date){
-		dobTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+		doaTextField.setText(Animal.printDate(date));
 	}
 	
 	public String getRelinquishingParty(){
@@ -332,9 +330,8 @@ public class BasicInfoPanel extends JPanel {
 		return Animal.parseDate(dateTextField.getText());
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void setChipDate(Date date){
-		dateTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+		dateTextField.setText(Animal.printDate(date));
 	}
 	
 	public String getChipOwner(){

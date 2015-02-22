@@ -367,9 +367,8 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		return Animal.parseDate(fleaTestTextField.getText());
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void setFleaTestDate(Date date){
-		fleaTestTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+		fleaTestTextField.setText(Animal.printDate(date));
 	}
 	
 	public boolean getHeartwormTested(){
@@ -387,18 +386,16 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		return Animal.parseDate(firstHeartwormTextField.getText());
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void setFirstHeartwormTreatment(Date date){
-		firstHeartwormTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+		firstHeartwormTextField.setText(Animal.printDate(date));
 	}
 	
 	public Date getResetHeartwormTreatment(){
 		return Animal.parseDate(resetHeartwormTextField.getText());
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void setResetHeartwormTreatment(Date date){
-		resetHeartwormTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+		resetHeartwormTextField.setText(Animal.printDate(date));
 	}
 	
 	public boolean getRabiesVaccinated(){
@@ -413,9 +410,8 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		return Animal.parseDate(rabiesTextField.getText());
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void setRabiesDate(Date date){
-		rabiesTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+		rabiesTextField.setText(Animal.printDate(date));
 	}
 	
 	public boolean getDistemperVaccinated(){
@@ -430,9 +426,8 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		return Animal.parseDate(distemperTextField.getText());
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void setDistemperDate(Date date){
-		distemperTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+		distemperTextField.setText(Animal.printDate(date));
 	}
 	
 	public boolean getBordetellaVaccinated(){
@@ -447,9 +442,8 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		return Animal.parseDate(bordetellaTextField.getText());
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void setBordetellaDate(Date date){
-		bordetellaTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+		bordetellaTextField.setText(Animal.printDate(date));
 	}
 	
 	public boolean getSpayedNeutered(){
@@ -464,9 +458,8 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		return Animal.parseDate(spayedNeuteredTextField.getText());
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void setSpayedNeuteredDate(Date date){
-		bordetellaTextField.setText((date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900));
+		bordetellaTextField.setText(Animal.printDate(date));
 	}
 
 	@Override
@@ -502,17 +495,19 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		}
 		
 		// First Heartworm Text Field
-		try {
-			Animal.parseDate(firstHeartwormTextField.getText());
-		} catch (Exception e) {
-			return showErrorDialog(firstHeartwormTextField);
-		}
+		if(heartwormComboBox.getSelectedItem().equals("Positive")){
+			try {
+				Animal.parseDate(firstHeartwormTextField.getText());
+			} catch (Exception e) {
+				return showErrorDialog(firstHeartwormTextField);
+			}
 		
-		// Reset Heartworm Text Field
-		try {
-			Animal.parseDate(resetHeartwormTextField.getText());
-		} catch (Exception e) {
-			return showErrorDialog(resetHeartwormTextField);
+			// Reset Heartworm Text Field
+			try {
+				Animal.parseDate(resetHeartwormTextField.getText());
+			} catch (Exception e) {
+				return showErrorDialog(resetHeartwormTextField);
+			}
 		}
 		
 		// Rabies Date Text Field
@@ -537,10 +532,12 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		}
 		
 		// Spayed / Neutered Text Field
-		try {
-			Animal.parseDate(spayedNeuteredTextField.getText());
-		} catch (Exception e) {
-			return showErrorDialog(spayedNeuteredTextField);
+		if(spayedNeuteredComboBox.getSelectedItem().equals(false)){
+			try {
+				Animal.parseDate(spayedNeuteredTextField.getText());
+			} catch (Exception e) {
+				return showErrorDialog(spayedNeuteredTextField);
+			}
 		}
 		
 		return true;

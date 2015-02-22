@@ -116,6 +116,7 @@ public class ARSFrame extends JFrame {
                 JOptionPane.QUESTION_MESSAGE, null, null, null);
         if (confirm == JOptionPane.YES_OPTION) {
         	AnimalRecordsSystem.getStaff().saveStaff();
+        	AnimalRecordsSystem.getAnimals().saveAnimals();
         	AnimalRecordsSystem.getFrame().dispose();
         	new Log("Now terminating application");
             System.exit(1);

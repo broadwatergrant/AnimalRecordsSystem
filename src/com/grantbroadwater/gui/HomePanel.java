@@ -1,15 +1,18 @@
 package com.grantbroadwater.gui;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import com.grantbroadwater.AnimalRecordsSystem;
 import com.grantbroadwater.animal.Animal;
@@ -32,8 +35,8 @@ public class HomePanel extends JPanel {
 	private BasicInfoPanel basicInfoPanel;
 	private SpecificInfoPanel specificInfoPanel;
 	private JButton saveButton;
+	private JButton adoptButton;
 	
-	@SuppressWarnings("unused")
 	private boolean toOverwriteAnimal;
 	private Animal animalToOverwrite;
 	
@@ -91,6 +94,19 @@ public class HomePanel extends JPanel {
 			}
 		});
 		add(saveButton);
+		
+		// Adopt Button
+		adoptButton = new JButton("Adopt");
+		adoptButton.setFont(new Font(enter.getFont().getName(), Font.PLAIN, 16));
+		adoptButton.setLocation(550, 550);
+		adoptButton.setSize(100, 30);
+		adoptButton.addActionListener(new ActionListener(){@Override
+			public void actionPerformed(ActionEvent e) {
+				if(allFieldsReady())
+					adoptAnimalFromGUI();
+			}
+		});
+		add(adoptButton);
 	}
 	
 	public void prep(){
@@ -150,25 +166,133 @@ public class HomePanel extends JPanel {
 		return result;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private void clearAllFields(){
-		// TODO: Clear all fields
-		new Log("Clear Fields");
+		for(Component c : basicInfoPanel.getComponents()){
+			if(c instanceof JTextField){
+				if(c.getName().toLowerCase().indexOf("date") != -1)
+					((JTextField)c).setText("mm/dd/yyyy");
+				else
+					((JTextField)c).setText("");
+			}else if(c instanceof JComboBox){
+				((JComboBox)c).setSelectedIndex(0);
+			}
+		}
+		for(Component c : specificInfoPanel.getComponents()){
+			if(c instanceof JTextField){
+				if(c.getName().toLowerCase().indexOf("date") != -1)
+					((JTextField)c).setText("mm/dd/yyyy");
+				else
+					((JTextField)c).setText("");
+			}else if(c instanceof JComboBox){
+				((JComboBox)c).setSelectedIndex(0);
+			}else if(c instanceof JCheckBox){
+				((JCheckBox)c).setSelected(false);
+			}
+		}
+		new Log("Cleared");
 	}
 	
 	private void setAllFields(){
 		// TODO: Set all fields
 		new Log("Fill fields with "+animalToOverwrite.getName()+"'s properties");
+		
+		basicInfoPanel.setName(animalToOverwrite.getName());
+		basicInfoPanel.setAge(animalToOverwrite.getAge());
+		basicInfoPanel.setDateOfBirth(animalToOverwrite.getDateOfBirth());
+		basicInfoPanel.setDateOfArrival(animalToOverwrite.getDateOfArrival());
+		basicInfoPanel.setRelinquishingParty(animalToOverwrite.getRelinquishingParty());
+		basicInfoPanel.setCageNumber(animalToOverwrite.getCageNumber());
+		basicInfoPanel.setChippped(animalToOverwrite.getChip().isChipped());
+		basicInfoPanel.setChipNumber(animalToOverwrite.getChip().getChipNumber());
+		if(animalToOverwrite.getChip().isChipped()){
+			basicInfoPanel.setChipDate(animalToOverwrite.getChip().getContactDate());
+			basicInfoPanel.setChipOwner(animalToOverwrite.getChip().getOwner());
+		}else{
+			basicInfoPanel.setChipDate(animalToOverwrite.getChip().getImplantDate());
+		}
+		
+		
+		switch(animalToOverwrite.getType()){
+		case DOG:
+			fillFromDog();
+			break;
+		case CAT:
+			fillFromCat();
+			break;
+		case OTHER:
+			fillFromOther();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	private void fillFromDog(){
+		DogInfoPanel DIP = (DogInfoPanel)specificInfoPanel;
+		Dog d = (Dog)animalToOverwrite;
+		DIP.setBreed(d.getBreed());
+		DIP.setSex(d.getSex());
+		DIP.setFleaTested(d.isFleaTested());
+		if(d.isFleaTested())
+			DIP.setFleaTestDate(d.getFirstFleaTreatment());
+		DIP.setHeartwormTested(d.isHeartwormTested());
+		if(d.isHeartwormTested()){
+			DIP.setFirstHeartwormTreatment(d.getBeginHeartwormDate());
+			DIP.setResetHeartwormTreatment(d.getResetHeartwormDate());
+		}
+		DIP.setRabiesVaccinated(d.isRabiesVaccinated());
+		// TODO: Rabies Date
+		DIP.setDistemperVaccinated(d.isDistemperVaccinated());
+		// TODO: Distemper Date
+		DIP.setBordetellaVaccinated(d.isBordetellaVaccinated());
+		// TODO: Bordetella Date
+		DIP.setSpayedNeutered(d.isSpayedNeutered());
+		if(!d.isSpayedNeutered())
+			DIP.setSpayedNeuteredDate(d.getSpayedNeuteredDate());
+	}
+	
+	private void fillFromCat(){
+		
+	}
+	
+	private void fillFromOther(){
+		
 	}
 	
 	private boolean allFieldsReady(){
-		return basicInfoPanel.allFieldsReady();
+		return basicInfoPanel.allFieldsReady() && specificInfoPanel.allFieldsReady();
+	}
+	
+	private void adoptAnimalFromGUI(){
+		if(!allFieldsReady())
+			return;
+		
+		switch(basicInfoPanel.getType()){
+		case DOG:
+			AnimalRecordsSystem.getAnimals().moveToPast(getDogFromGUI());
+			break;
+		case CAT:
+			
+			break;
+		case OTHER:
+			
+			break;
+		default:
+			break;
+		}
+		AnimalRecordsSystem.getAnimals().saveAnimals();
+		AnimalRecordsSystem.presentHomePanel();
 	}
 	
 	private void saveAnimalFromGUI(){
 		Animals animals = AnimalRecordsSystem.getAnimals();
 		switch(basicInfoPanel.getType()){
 		case DOG:
-			animals.addCurrentAnimal(getDogFromGUI());
+			if(toOverwriteAnimal)
+				animals.replace(animalToOverwrite, getDogFromGUI());
+			else
+				animals.addCurrentAnimal(getDogFromGUI());
 			break;
 		case CAT:
 			
@@ -220,7 +344,13 @@ public class HomePanel extends JPanel {
 		d.setSpayedNeutered(DIP.getSpayedNeutered());
 		if(!d.isSpayedNeutered())
 			d.setSpayedNeuteredDate(DIP.getSpayedNeuteredDate());
-		
+	
+		if(!toOverwriteAnimal){
+			d.generateCaseNumber();
+		}else{
+			d.setCaseNumber((String)animalComboBox.getSelectedItem());
+		}
+			
 		return d;
 	}
 	
