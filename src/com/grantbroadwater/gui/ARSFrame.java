@@ -80,6 +80,10 @@ public class ARSFrame extends JFrame {
 		SwingUtilities.invokeLater(new Runnable(){
 			@Override
 			public void run(){
+				for(Component c : mainPanel.getComponents()){
+					c.revalidate();
+					c.repaint();
+				}
 				mainPanel.revalidate();
 				repaint();
 			}

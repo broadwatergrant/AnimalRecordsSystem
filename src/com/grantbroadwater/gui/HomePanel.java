@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.print.attribute.standard.PresentationDirection;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -46,6 +47,32 @@ public class HomePanel extends JPanel {
 	public HomePanel() {
 		super(null);
 		
+		loadGUI();
+		
+		toOverwriteAnimal = false;
+		animalToOverwrite = null;
+	}
+	
+	public HomePanel(Animal a){
+		super(null);
+		
+		loadGUI();
+		
+		toOverwriteAnimal = true;
+		animalToOverwrite = a;
+		
+		if(a.getType() == AnimalType.DOG)
+			specificInfoPanel = DIP;
+		if(a.getType() == AnimalType.CAT)
+			specificInfoPanel = CIP;
+		
+		animalComboBox.setSelectedItem(a.getCaseNumber());
+		
+		setAllFields();
+	}
+	
+	private void loadGUI(){
+
 		// Panel
 		setBackground(Color.WHITE);
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -70,9 +97,6 @@ public class HomePanel extends JPanel {
 		});
 		add(enter);
 		
-		toOverwriteAnimal = false;
-		animalToOverwrite = null;
-		
 		// Basic Info Panel
 		basicInfoPanel = new BasicInfoPanel();
 		basicInfoPanel.setLocation(10, 200);
@@ -83,12 +107,15 @@ public class HomePanel extends JPanel {
 		DIP = new DogInfoPanel();
 		DIP.setLocation(350, 200);
 		DIP.setSize(440, 325);
-		add(DIP);
 		
 		// Cat Info Panel
 		CIP = new CatInfoPanel();
 		CIP.setLocation(350, 200);
 		CIP.setSize(440, 325);
+		
+		// Specific Info Panel
+		specificInfoPanel = DIP;
+		add(specificInfoPanel);
 		
 		// Save Button
 		saveButton = new JButton("Save");
@@ -115,12 +142,8 @@ public class HomePanel extends JPanel {
 			}
 		});
 		add(adoptButton);
-	}
-	
-	public void prep(){
-		// Frame
-		AnimalRecordsSystem.getFrame().showMenuBar();
 		
+
 		// Animal Combo Box
 		if(animalComboBox != null)
 			remove(animalComboBox);
@@ -133,10 +156,15 @@ public class HomePanel extends JPanel {
 		animalComboBox.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				actionPerformedOnComboBox();
+				//actionPerformedOnComboBox();
 			}
 		});
 		add(animalComboBox);
+	}
+	
+	public void prep(){
+		// Frame
+		AnimalRecordsSystem.getFrame().showMenuBar();
 	}
 	
 	public void prepAndShow(){
@@ -145,18 +173,14 @@ public class HomePanel extends JPanel {
 	}
 	
 	private void actionPerformedOnComboBox(){
-		if(animalComboBox.getSelectedItem().equals(newPrompt)){
-			toOverwriteAnimal = false;
-			animalToOverwrite = null;
-			clearAllFields();
-		}else{
-			toOverwriteAnimal = true;
-			animalToOverwrite = AnimalRecordsSystem.getAnimals().getAnimalWithCaseNumber((String)animalComboBox.getSelectedItem());
-			if(animalToOverwrite != null)
-				setAllFields();
-			else
-				clearAllFields();
-		}
+		
+			if(animalComboBox.getSelectedItem().equals(newPrompt)){
+				AnimalRecordsSystem.presentHomePanel();
+			}else{
+				Animal a = AnimalRecordsSystem.getAnimals().getAnimalWithCaseNumber((String)animalComboBox.getSelectedItem());
+				AnimalRecordsSystem.presentHomePanel(a);
+			}
+		
 	}
 	
 	protected void setSpecificInfoPanel(SpecificInfoPanel panel){
@@ -207,7 +231,6 @@ public class HomePanel extends JPanel {
 		new Log("Fill fields with "+animalToOverwrite.getName()+"'s properties");
 		
 		basicInfoPanel.setName(animalToOverwrite.getName());
-		basicInfoPanel.setType(animalToOverwrite.getType());
 		basicInfoPanel.setAge(animalToOverwrite.getAge());
 		basicInfoPanel.setDateOfBirth(animalToOverwrite.getDateOfBirth());
 		basicInfoPanel.setDateOfArrival(animalToOverwrite.getDateOfArrival());
@@ -378,10 +401,10 @@ public class HomePanel extends JPanel {
 	public void newAnimalTypeSelected(AnimalType type){
 		switch(type){
 		case DOG:
-			specificInfoPanel = new DogInfoPanel();
+			specificInfoPanel = DIP;
 			break;
 		case CAT:
-			specificInfoPanel = new CatInfoPanel();
+			specificInfoPanel = CIP;
 			break;
 		//TODO: Add Other
 		default:
@@ -399,8 +422,10 @@ public class HomePanel extends JPanel {
 			public void run() {
 				specificInfoPanel.revalidate();
 				specificInfoPanel.repaint();
+				specificInfoPanel.updateUI();
 				revalidate();
 				repaint();
+				updateUI();
 			}
 		});
 		AnimalRecordsSystem.getFrame().updateGraphics();

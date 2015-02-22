@@ -5,6 +5,7 @@ import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
+import com.grantbroadwater.animal.Animal;
 import com.grantbroadwater.animal.Animals;
 import com.grantbroadwater.gui.ARSFrame;
 import com.grantbroadwater.gui.HomePanel;
@@ -90,6 +91,13 @@ public class AnimalRecordsSystem {
 	
 	public static void presentHomePanel(){
 		frame.setTitle(currentUser.getName());
+		homePanel = new HomePanel();
+		homePanel.prepAndShow();
+	}
+	
+	public static void presentHomePanel(Animal a){
+		frame.setTitle(currentUser.getName());
+		homePanel = new HomePanel(a);
 		homePanel.prepAndShow();
 	}
 	

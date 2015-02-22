@@ -61,12 +61,13 @@ public class BasicInfoPanel extends JPanel {
 		typeComboBox.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
 		typeComboBox.setLocation(85, 50);
 		typeComboBox.setSize(150, 25);
+		typeComboBox.setEnabled(false);
 		typeComboBox.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO: DELETE
 				new Log(typeComboBox.getSelectedItem()+" selectd.");
-				AnimalRecordsSystem.getHomePanel().newAnimalTypeSelected((AnimalType)typeComboBox.getSelectedItem());
+				
 			}
 		});
 		add(typeComboBox);
