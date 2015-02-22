@@ -177,6 +177,7 @@ public class HomePanel extends JPanel {
 			}else if(c instanceof JComboBox){
 				((JComboBox)c).setSelectedIndex(0);
 			}
+			c.setBackground(Color.WHITE);
 		}
 		for(Component c : specificInfoPanel.getComponents()){
 			if(c instanceof JTextField){
@@ -189,6 +190,7 @@ public class HomePanel extends JPanel {
 			}else if(c instanceof JCheckBox){
 				((JCheckBox)c).setSelected(false);
 			}
+			c.setBackground(Color.WHITE);
 		}
 		new Log("Cleared");
 	}

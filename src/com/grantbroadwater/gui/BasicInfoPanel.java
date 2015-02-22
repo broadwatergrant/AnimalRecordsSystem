@@ -401,7 +401,9 @@ public class BasicInfoPanel extends JPanel {
 	}
 	
 	private boolean showErrorDialog(Component comp){
+		comp.setBackground(new Color(240, 149, 153));
 		JOptionPane.showMessageDialog(null, comp.getName()+" is not correctly filled");
+		comp.requestFocus();
 		return false;
 	}
 

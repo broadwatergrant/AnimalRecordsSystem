@@ -49,36 +49,44 @@ public class SignInPanel extends JPanel {
 		}
 		
 		// Name Label
-				JLabel lblN = new JLabel("Name: ");
-				lblN.setFont(new Font(lblN.getFont().getName(), Font.PLAIN, 16));
-				lblN.setSize(195, 20);
-				lblN.setLocation(404,100);
-				add(lblN);
+		JLabel lblN = new JLabel("Name: ");
+		lblN.setFont(new Font(lblN.getFont().getName(), Font.PLAIN, 16));
+		lblN.setSize(195, 20);
+		lblN.setLocation(404,100);
+		add(lblN);
 				
 				// Name text box
-				final JTextField tbN = new JTextField();
-				tbN.setFont(new Font(tbN.getFont().getName(), Font.PLAIN, 14));
-				tbN.setSize(300, 30);
-				tbN.setLocation(404,125);
-				tbN.setHorizontalAlignment(JTextField.RIGHT);
-				tbN.setText("");
-				add(tbN);
+		final JTextField tbN = new JTextField();
+		tbN.setFont(new Font(tbN.getFont().getName(), Font.PLAIN, 14));
+		tbN.setSize(300, 30);
+		tbN.setLocation(404,125);
+		tbN.setHorizontalAlignment(JTextField.RIGHT);
+		tbN.setText("");
+		add(tbN);
 				
-				// Password Label
-				JLabel lblP = new JLabel("Password: ");
-				lblP.setFont(new Font(lblP.getFont().getName(), Font.PLAIN, 16));
-				lblP.setSize(195, 20);
-				lblP.setLocation(404,185);
-				add(lblP);
+		// Password Label
+		JLabel lblP = new JLabel("Password: ");
+		lblP.setFont(new Font(lblP.getFont().getName(), Font.PLAIN, 16));
+		lblP.setSize(195, 20);
+		lblP.setLocation(404,185);
+		add(lblP);
 				
-				// Password text box
-				final JPasswordField tbP = new JPasswordField();
-				tbP.setFont(new Font(tbP.getFont().getName(), Font.PLAIN, 14));
-				tbP.setSize(300, 30);
-				tbP.setLocation(404,210);
-				tbP.setHorizontalAlignment(JTextField.RIGHT);
-				tbP.setText("");
-				add(tbP);
+		// Password text box
+		final JPasswordField tbP = new JPasswordField();
+		tbP.setFont(new Font(tbP.getFont().getName(), Font.PLAIN, 14));
+		tbP.setSize(300, 30);
+		tbP.setLocation(404,210);
+		tbP.setHorizontalAlignment(JTextField.RIGHT);
+		tbP.setText("");
+		tbP.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String n = tbN.getText();
+				String p = new String(tbP.getPassword());
+				signInAttempt(n.toUpperCase().trim(), p.toUpperCase().trim());
+			}
+		});
+		add(tbP);
 				
 				
 		// Sign In Button
