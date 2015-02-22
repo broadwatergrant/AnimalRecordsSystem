@@ -13,8 +13,11 @@ public class Dog extends Animal {
 	private Date beginHeartwormDate;
 	private Date resetHeartwormDate;
 	private boolean rabiesVaccination;
+	private Date rabiesDate;
 	private boolean distemperVaccination;
+	private Date distemperDate;
 	private boolean bordetellaVaccination;
+	private Date bordetellaDate;
 	
 	public Dog() {
 		super();		
@@ -114,6 +117,14 @@ public class Dog extends Animal {
 		this.rabiesVaccination = isRabiesVaccinated;
 	}
 	
+	public Date getRabiesDate() {
+		return rabiesDate;
+	}
+
+	public void setRabiesDate(Date rabiesDate) {
+		this.rabiesDate = rabiesDate;
+	}
+
 	public boolean isDistemperVaccinated(){
 		return this.distemperVaccination;
 	}
@@ -121,6 +132,14 @@ public class Dog extends Animal {
 		this.distemperVaccination = isDistemperVaccinated;
 	}
 	
+	public Date getDistemperDate() {
+		return distemperDate;
+	}
+
+	public void setDistemperDate(Date distemperDate) {
+		this.distemperDate = distemperDate;
+	}
+
 	public boolean isBordetellaVaccinated(){
 		return this.bordetellaVaccination;
 	}
@@ -128,6 +147,14 @@ public class Dog extends Animal {
 		this.bordetellaVaccination = isBordetellaVaccinated;
 	}
 	
+	public Date getBordetellaDate() {
+		return bordetellaDate;
+	}
+
+	public void setBordetellaDate(Date bordetellaDate) {
+		this.bordetellaDate = bordetellaDate;
+	}
+
 	@Override
 	public String getStringRepresentation(){
 		String result = super.getStringRepresentation();
@@ -144,7 +171,10 @@ public class Dog extends Animal {
 		result += this.isBordetellaVaccinated()+"~";
 		result += this.isCurrent()+"~";
 		result += this.isSpayedNeutered()+"~";
-		result += printDate(getSpayedNeuteredDate());
+		result += printDate(getSpayedNeuteredDate())+"~";
+		result += printDate(getRabiesDate())+"~";
+		result += printDate(getDistemperDate())+"~";
+		result += printDate(getBordetellaDate());
 		
 		return result+";";
 	}

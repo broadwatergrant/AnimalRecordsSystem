@@ -194,7 +194,6 @@ public class HomePanel extends JPanel {
 	}
 	
 	private void setAllFields(){
-		// TODO: Set all fields
 		new Log("Fill fields with "+animalToOverwrite.getName()+"'s properties");
 		
 		basicInfoPanel.setName(animalToOverwrite.getName());
@@ -242,11 +241,11 @@ public class HomePanel extends JPanel {
 			DIP.setResetHeartwormTreatment(d.getResetHeartwormDate());
 		}
 		DIP.setRabiesVaccinated(d.isRabiesVaccinated());
-		// TODO: Rabies Date
+		DIP.setRabiesDate(d.getRabiesDate());
 		DIP.setDistemperVaccinated(d.isDistemperVaccinated());
-		// TODO: Distemper Date
+		DIP.setDistemperDate(d.getDistemperDate());
 		DIP.setBordetellaVaccinated(d.isBordetellaVaccinated());
-		// TODO: Bordetella Date
+		DIP.setBordetellaDate(d.getBordetellaDate());
 		DIP.setSpayedNeutered(d.isSpayedNeutered());
 		if(!d.isSpayedNeutered())
 			DIP.setSpayedNeuteredDate(d.getSpayedNeuteredDate());
@@ -339,11 +338,11 @@ public class HomePanel extends JPanel {
 			d.setResetHeartwormDate(DIP.getResetHeartwormTreatment());
 		}
 		d.setRabiesVaccinated(DIP.getRabiesVaccinated());
-		// TODO: Rabies Date
+		d.setRabiesDate(DIP.getRabiesDate());
 		d.setDistemperVaccinated(DIP.getDistemperVaccinated());
-		// TODO: Distemper Date
+		d.setDistemperDate(DIP.getDistemperDate());
 		d.setBordetellaVaccinated(DIP.getBordetellaVaccinated());
-		// TODO: Bordetella Date
+		d.setBordetellaDate(DIP.getBordetellaDate());
 		d.setSpayedNeutered(DIP.getSpayedNeutered());
 		if(!d.isSpayedNeutered())
 			d.setSpayedNeuteredDate(DIP.getSpayedNeuteredDate());

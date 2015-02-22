@@ -127,6 +127,9 @@ public class Animals {
 		result.setCurrent(Boolean.parseBoolean(parts[19]));
 		result.setSpayedNeutered(Boolean.parseBoolean(parts[20]));
 		result.setSpayedNeuteredDate(Animal.parseDate(parts[21]));
+		result.setRabiesDate(Animal.parseDate(parts[22]));
+		result.setDistemperDate(Animal.parseDate(parts[23]));
+		result.setBordetellaDate(Animal.parseDate(parts[24]));
 		
 		return result;
 	}
