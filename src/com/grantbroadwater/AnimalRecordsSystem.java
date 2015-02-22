@@ -93,6 +93,10 @@ public class AnimalRecordsSystem {
 		homePanel.prepAndShow();
 	}
 	
+	public static HomePanel getHomePanel(){
+		return homePanel;
+	}
+	
 	public static ARSFrame getFrame(){
 		return frame;
 	}

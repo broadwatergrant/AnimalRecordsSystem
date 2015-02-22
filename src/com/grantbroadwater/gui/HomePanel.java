@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import com.grantbroadwater.AnimalRecordsSystem;
 import com.grantbroadwater.animal.Animal;
@@ -34,6 +35,8 @@ public class HomePanel extends JPanel {
 	private JButton enter;
 	private BasicInfoPanel basicInfoPanel;
 	private SpecificInfoPanel specificInfoPanel;
+	private DogInfoPanel DIP;
+	private CatInfoPanel CIP;
 	private JButton saveButton;
 	private JButton adoptButton;
 	
@@ -76,11 +79,16 @@ public class HomePanel extends JPanel {
 		basicInfoPanel.setSize(325, 325);
 		add(basicInfoPanel);
 		
-		// Specific Info Panel
-		specificInfoPanel = new DogInfoPanel();
-		specificInfoPanel.setLocation(350, 200);
-		specificInfoPanel.setSize(440, 325);
-		add(specificInfoPanel);
+		// Dog Info Panel
+		DIP = new DogInfoPanel();
+		DIP.setLocation(350, 200);
+		DIP.setSize(440, 325);
+		add(DIP);
+		
+		// Cat Info Panel
+		CIP = new CatInfoPanel();
+		CIP.setLocation(350, 200);
+		CIP.setSize(440, 325);
 		
 		// Save Button
 		saveButton = new JButton("Save");
@@ -199,6 +207,7 @@ public class HomePanel extends JPanel {
 		new Log("Fill fields with "+animalToOverwrite.getName()+"'s properties");
 		
 		basicInfoPanel.setName(animalToOverwrite.getName());
+		basicInfoPanel.setType(animalToOverwrite.getType());
 		basicInfoPanel.setAge(animalToOverwrite.getAge());
 		basicInfoPanel.setDateOfBirth(animalToOverwrite.getDateOfBirth());
 		basicInfoPanel.setDateOfArrival(animalToOverwrite.getDateOfArrival());
@@ -364,6 +373,37 @@ public class HomePanel extends JPanel {
 		}
 			
 		return d;
+	}
+	
+	public void newAnimalTypeSelected(AnimalType type){
+		switch(type){
+		case DOG:
+			specificInfoPanel = new DogInfoPanel();
+			break;
+		case CAT:
+			specificInfoPanel = new CatInfoPanel();
+			break;
+		//TODO: Add Other
+		default:
+			basicInfoPanel.setType(AnimalType.DOG);
+			specificInfoPanel = new DogInfoPanel();
+		}
+		
+		// TODO: DELETE
+				new Log("Changing to "+specificInfoPanel.getClass());
+		
+		specificInfoPanel.setLocation(350, 200);
+		specificInfoPanel.setSize(440, 325);
+		SwingUtilities.invokeLater(new Runnable(){
+			@Override
+			public void run() {
+				specificInfoPanel.revalidate();
+				specificInfoPanel.repaint();
+				revalidate();
+				repaint();
+			}
+		});
+		AnimalRecordsSystem.getFrame().updateGraphics();
 	}
 	
 }

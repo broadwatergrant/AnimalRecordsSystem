@@ -65,7 +65,10 @@ public class Animals {
 			this.clear();
 			while(scan.hasNext()){
 				String s = scan.next();
+				// TODO: DELETE
+				new Log(s);
 				Animal a = parseAnimal(s);
+				new Log(a.toString());
 				addToAppropriateList(a);
 			}
 			scan.close();
@@ -78,10 +81,15 @@ public class Animals {
 	public void saveAnimals(){
 		try {
 			PrintWriter writer = new PrintWriter(animalFile, "UTF-8");
+			int count = 0;
 			
 			for(Animal a : getAll()){
 				// TODO: Confirm correctiveness
-				writer.println(a.getStringRepresentation());
+				if(count == getAll().size()-1)
+					writer.print(a.getStringRepresentation());
+				else
+					writer.println(a.getStringRepresentation());
+				count++;
 			}
 			
 			writer.close();

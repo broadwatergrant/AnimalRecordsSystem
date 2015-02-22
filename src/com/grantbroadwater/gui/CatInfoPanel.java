@@ -1,7 +1,10 @@
 package com.grantbroadwater.gui;
 
+import java.awt.Font;
+
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import com.grantbroadwater.animal.DeclawingType;
@@ -34,6 +37,22 @@ public class CatInfoPanel extends SpecificInfoPanel {
 	
 	public CatInfoPanel() {
 		super();
+		
+		int w = 125;
+		
+		JLabel title = new JLabel("Cat Information");
+		title.setFont(new Font(this.getFont().getName(), Font.PLAIN, 20));
+		title.setLocation(150, 10);
+		title.setSize(300, 40);
+		add(title);
+		
+		// Breed Label
+		JLabel lblBreedName = new JLabel("Breed:");
+		lblBreedName.setFont(new Font(this.getFont().getName(), Font.PLAIN, 14));
+		lblBreedName.setLocation(10, 65);
+		lblBreedName.setSize(w, 20);
+		add(lblBreedName);
+		
 	}
 	
 	@Override

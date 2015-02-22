@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import com.grantbroadwater.AnimalRecordsSystem;
 import com.grantbroadwater.animal.Animal;
 import com.grantbroadwater.animal.AnimalType;
+import com.grantbroadwater.util.Log;
 
 public class BasicInfoPanel extends JPanel {
 
@@ -63,7 +64,9 @@ public class BasicInfoPanel extends JPanel {
 		typeComboBox.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				// TODO: DELETE
+				new Log(typeComboBox.getSelectedItem()+" selectd.");
+				AnimalRecordsSystem.getHomePanel().newAnimalTypeSelected((AnimalType)typeComboBox.getSelectedItem());
 			}
 		});
 		add(typeComboBox);
