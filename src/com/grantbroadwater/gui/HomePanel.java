@@ -250,7 +250,9 @@ public class HomePanel extends JPanel {
 		DIP.setSpayedNeutered(d.isSpayedNeutered());
 		if(!d.isSpayedNeutered())
 			DIP.setSpayedNeuteredDate(d.getSpayedNeuteredDate());
+		DIP.setQuarentined(d.isQuarantined());
 	}
+	
 	
 	private void fillFromCat(){
 		
@@ -318,6 +320,7 @@ public class HomePanel extends JPanel {
 		d.setDateOfArrival(basicInfoPanel.getDateOfArrival());
 		d.setRelinquishingParty(basicInfoPanel.getRelinquishingParty());
 		d.setCageNumber(basicInfoPanel.getCageNumber());
+		d.setQuarantined(true);
 		if(basicInfoPanel.getChipped())
 			d.setChip(new Chip(basicInfoPanel.getChipOwner(), basicInfoPanel.getChipNumber(), basicInfoPanel.getChipDate()));
 		else
@@ -345,10 +348,18 @@ public class HomePanel extends JPanel {
 		if(!d.isSpayedNeutered())
 			d.setSpayedNeuteredDate(DIP.getSpayedNeuteredDate());
 	
+		d.setQuarantined(DIP.isQuarentined());
+		
 		if(!toOverwriteAnimal){
 			d.generateCaseNumber();
 		}else{
 			d.setCaseNumber((String)animalComboBox.getSelectedItem());
+		}
+		
+		if((d.getCaseNumber().charAt(0) == 'Q' && !d.isQuarantined())
+				|| (d.getCaseNumber().charAt(0) != 'Q' && d.isQuarantined())){
+			String pre = (d.isQuarantined()) ? "Q" : "";
+			d.setCaseNumber(pre + d.getCaseNumber().replace("Q", ""));
 		}
 			
 		return d;

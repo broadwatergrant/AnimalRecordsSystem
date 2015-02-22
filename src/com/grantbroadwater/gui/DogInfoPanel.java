@@ -45,6 +45,7 @@ public class DogInfoPanel extends SpecificInfoPanel {
 	private JTextField bordetellaTextField;
 	private JComboBox<Boolean> spayedNeuteredComboBox;
 	private JTextField spayedNeuteredTextField;
+	private JCheckBox isQuar;
 	
 	public DogInfoPanel() {
 		super();
@@ -330,6 +331,13 @@ public class DogInfoPanel extends SpecificInfoPanel {
 		spayedNeuteredTextField.setSize(w, 20);
 		spayedNeuteredTextField.setEnabled(false);
 		add(spayedNeuteredTextField);
+		
+		isQuar = new JCheckBox("Is in Quarantine");
+		isQuar.setBackground(Color.WHITE);
+		isQuar.setFont(new Font(this.getFont().getName(), Font.PLAIN, 12));
+		isQuar.setLocation(145, 265);
+		isQuar.setSize(w, 20);
+		add(isQuar);
 	}
 	
 	public DogBreed getBreed(){
@@ -460,6 +468,14 @@ public class DogInfoPanel extends SpecificInfoPanel {
 	
 	public void setSpayedNeuteredDate(Date date){
 		bordetellaTextField.setText(Animal.printDate(date));
+	}
+	
+	public boolean isQuarentined(){
+		return isQuar.isSelected();
+	}
+	
+	public void setQuarentined(boolean value){
+		isQuar.setSelected(value);
 	}
 
 	@Override
