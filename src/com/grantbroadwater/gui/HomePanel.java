@@ -30,7 +30,9 @@ public class HomePanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final String newPrompt = "Create New Animal";
+	private static final String newDogPrompt = "Create New Dog";
+	private static final String newCatPrompt = "Create New Cat";
+	private static final String newOtherPrompt = "Create New Other";
 
 	private JComboBox<String> animalComboBox;
 	private JButton enter;
@@ -63,12 +65,31 @@ public class HomePanel extends JPanel {
 		
 		if(a.getType() == AnimalType.DOG)
 			specificInfoPanel = DIP;
-		if(a.getType() == AnimalType.CAT)
+		else if(a.getType() == AnimalType.CAT)
 			specificInfoPanel = CIP;
 		
 		animalComboBox.setSelectedItem(a.getCaseNumber());
 		
 		setAllFields();
+	}
+	
+	public HomePanel(AnimalType type){
+		super(null);
+		
+		loadGUI();
+		
+		toOverwriteAnimal = false;
+		animalToOverwrite = null;
+		
+		if(type == AnimalType.DOG){
+			specificInfoPanel = DIP;
+			basicInfoPanel.setType(type);
+		}else if(type == AnimalType.CAT){
+			specificInfoPanel = CIP;
+			basicInfoPanel.setType(type);
+			// TODO: DELETE
+			new Log("1111111111Creating Cat Pane");
+		}
 	}
 	
 	private void loadGUI(){
@@ -147,12 +168,15 @@ public class HomePanel extends JPanel {
 		// Animal Combo Box
 		if(animalComboBox != null)
 			remove(animalComboBox);
-		animalComboBox = new JComboBox<String>(prependArray(AnimalRecordsSystem.getAnimals().getAllCurrentCaseNumbers(), newPrompt));
+		String[] array = prependArray(AnimalRecordsSystem.getAnimals().getAllCurrentCaseNumbers(), newOtherPrompt);
+		array = prependArray(array, newCatPrompt);
+		array = prependArray(array, newDogPrompt);
+		animalComboBox = new JComboBox<String>(array);
 		animalComboBox.setEditable(true);
 		animalComboBox.setFont(new Font(animalComboBox.getFont().getName(), Font.PLAIN, 16));
 		animalComboBox.setLocation(250, 100);
 		animalComboBox.setSize(200, 30);
-		animalComboBox.setSelectedItem(newPrompt);
+		animalComboBox.setSelectedItem(newDogPrompt);
 		animalComboBox.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -174,8 +198,10 @@ public class HomePanel extends JPanel {
 	
 	private void actionPerformedOnComboBox(){
 		
-			if(animalComboBox.getSelectedItem().equals(newPrompt)){
-				AnimalRecordsSystem.presentHomePanel();
+			if(animalComboBox.getSelectedItem().equals(newDogPrompt)){
+				AnimalRecordsSystem.presentHomePanel(AnimalType.DOG);
+			}else if(animalComboBox.getSelectedItem().equals(newCatPrompt)){
+				AnimalRecordsSystem.presentHomePanel(AnimalType.CAT);				
 			}else{
 				Animal a = AnimalRecordsSystem.getAnimals().getAnimalWithCaseNumber((String)animalComboBox.getSelectedItem());
 				AnimalRecordsSystem.presentHomePanel(a);

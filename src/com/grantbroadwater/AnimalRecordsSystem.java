@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import com.grantbroadwater.animal.Animal;
+import com.grantbroadwater.animal.AnimalType;
 import com.grantbroadwater.animal.Animals;
 import com.grantbroadwater.gui.ARSFrame;
 import com.grantbroadwater.gui.HomePanel;
@@ -52,7 +53,7 @@ public class AnimalRecordsSystem {
 		animals = new Animals();
 		
 		// Home Panel
-		homePanel = new HomePanel();
+		homePanel = new HomePanel(AnimalType.CAT);
 		
 		new Log("Main Thread Closing");
 	}
@@ -86,7 +87,7 @@ public class AnimalRecordsSystem {
 
 	public static void signUserIn(StaffMember currentUser){
 		setCurrentUser(currentUser);
-		presentHomePanel();
+		presentHomePanel(AnimalType.CAT);
 	}
 	
 	public static void presentHomePanel(){
@@ -96,6 +97,12 @@ public class AnimalRecordsSystem {
 	}
 	
 	public static void presentHomePanel(Animal a){
+		frame.setTitle(currentUser.getName());
+		homePanel = new HomePanel(a);
+		homePanel.prepAndShow();
+	}
+	
+	public static void presentHomePanel(AnimalType a){
 		frame.setTitle(currentUser.getName());
 		homePanel = new HomePanel(a);
 		homePanel.prepAndShow();

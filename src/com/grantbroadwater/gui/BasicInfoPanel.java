@@ -65,8 +65,6 @@ public class BasicInfoPanel extends JPanel {
 		typeComboBox.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO: DELETE
-				new Log(typeComboBox.getSelectedItem()+" selectd.");
 				
 			}
 		});
